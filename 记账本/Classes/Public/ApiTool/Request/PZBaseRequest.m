@@ -49,4 +49,13 @@
     return nil;
 }
 
+-(NSDictionary *)fetchDataWithReformer:(id<ReformerProtocol>)reformer
+{
+    if (reformer == nil) {
+        return self.responseObject;
+    } else {
+        return [reformer reformDataWithManager:self];
+    }
+}
+
 @end

@@ -6,12 +6,10 @@
 //  Copyright © 2016年 fyp. All rights reserved.
 //
 
-#import "PZBaseRequest.h"
+#import "PZAccountRequest.h"
 
-@interface PZGetAccountListRequest : PZBaseRequest
-
-@property(nonatomic,strong,readonly) NSString *op;
-
+@interface PZGetAccountListRequest : PZAccountRequest
 
 -(instancetype)initWithUserId:(NSUInteger)userid;
+
 @end

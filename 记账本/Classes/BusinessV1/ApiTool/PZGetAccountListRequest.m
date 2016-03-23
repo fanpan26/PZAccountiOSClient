@@ -26,26 +26,15 @@
     return self;
 }
 
--(NSString *)apiUrl
-{
-    return [NSString stringWithFormat: @"/api/account.ashx?op=%@",self.op];
-}
-
 -(NSString *)op
 {
     return @"user_summary";
-}
-
--(PZRequestType)requestType
-{
-    return PZRequestTypeGet;
 }
 
 -(NSDictionary *)params
 {
     return @{
         @"operate_user":@(_userid),
-        @"token":@"123123"
     };
 }
 

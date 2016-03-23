@@ -22,8 +22,15 @@ typedef NS_ENUM(NSUInteger,PZRequestSerializerType) {
 @protocol PZBaseRequestDelegate <NSObject>
 
 @optional
--(void)requestSuccess:(id)JSON inRequest:(__kindof PZBaseRequest *)request;
--(void)requestFailed:(NSError *)error inRequest:(__kindof PZBaseRequest *)request;
+-(void)requestSuccessWithRequest:(__kindof PZBaseRequest *)request;
+-(void)requestFailedWithRequest:(__kindof PZBaseRequest *)request;
+
+@end
+
+@protocol ReformerProtocol <NSObject>
+
+@optional
+-(NSDictionary *)reformDataWithManager:(PZBaseRequest *)request;
 
 @end
 
@@ -37,5 +44,11 @@ typedef NS_ENUM(NSUInteger,PZRequestSerializerType) {
 @property(nonatomic,strong,readonly) NSDictionary *header;
 @property(nonatomic,strong,readonly) NSDictionary *params;
 @property(nonatomic,assign,readonly) PZRequestSerializerType serializerType;
+
+@property(nonatomic,strong) id responseObject;
+@property(nonatomic,strong) NSError *error;
+
+
+-(NSDictionary *)fetchDataWithReformer:(id<ReformerProtocol>) reformer;
 
 @end

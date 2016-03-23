@@ -16,6 +16,8 @@
 #import "PZGetAccountListRequest.h"
 #import "PZNetWorkAgent.h"
 
+#import "PZGetAccountListReformer.h"
+
 static NSString *kPZCostListCellID = @"kPZCostListCellID";
 
 @interface PZHomeCostListController()<PZAddCostViewDelegate,PZBaseRequestDelegate>
@@ -23,6 +25,7 @@ static NSString *kPZCostListCellID = @"kPZCostListCellID";
     PZAddCostView *_costView;
 }
 @property(nonatomic,strong) NSMutableArray *arrayCostList;
+@property(nonatomic,strong) PZGetAccountListReformer *getAccountListReformer;
 
 @end
 
@@ -137,15 +140,14 @@ static NSString *kPZCostListCellID = @"kPZCostListCellID";
 }
 
 
--(void)requestSuccess:(id)JSON inRequest:(PZBaseRequest *)request
+-(void)requestSuccessWithRequest:(__kindof PZBaseRequest *)request
 {
-    NSLog(@"%@",JSON);
-    NSLog(@"%@",[request class]);
+    NSDictionary *dict = [request fetchDataWithReformer:self.getAccountListReformer];
+    NSLog(@"%@",dict);
 }
 
--(void)requestFailed:(NSError *)error inRequest:(PZBaseRequest *)request
-{
-    NSLog(@"%@",error);
+-(void)requestFailedWithRequest:(__kindof PZBaseRequest *)request{
+  
 }
 #pragma  mark  getter setter
 
@@ -155,6 +157,14 @@ static NSString *kPZCostListCellID = @"kPZCostListCellID";
         _arrayCostList = [NSMutableArray array];
     }
     return _arrayCostList;
+}
+
+-(PZGetAccountListReformer *)getAccountListReformer
+{
+    if (_getAccountListReformer == nil) {
+        _getAccountListReformer = [[PZGetAccountListReformer alloc] init];
+    }
+    return _getAccountListReformer;
 }
 
 @end
