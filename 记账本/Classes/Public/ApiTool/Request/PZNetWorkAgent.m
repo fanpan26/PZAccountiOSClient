@@ -9,6 +9,7 @@
 #import "PZNetWorkAgent.h"
 #import "PZBaseRequest.h"
 #import "PZRequestConfig.h"
+#import "PZNetReachability.h"
 
 @interface PZNetWorkAgent()
 {
@@ -38,6 +39,12 @@
 {
     _request = request;
     
+    if (![[PZNetReachability sharedInstance] netReachable]) {
+        if (request.delegate && [request.delegate respondsToSelector:@selector(requestFailedWithNetworkUnConnected)]) {
+
+            [request.delegate requestFailedWithNetworkUnConnected];
+        }
+    }
     NSString *type;
     if (request.requestType == PZRequestTypeGet) {
         type = @"GET";

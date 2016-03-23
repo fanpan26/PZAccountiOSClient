@@ -16,6 +16,7 @@
 #import <UIKit/UIKit.h>
 
 #import "MSChatConfig.h"
+#import "PZNetReachability.h"
 
 @interface AppDelegate ()
 
@@ -44,6 +45,7 @@
     [[RCIM sharedRCIM] setConnectionStatusDelegate:self];
    /*即时通讯部分结束*/
     
+    [[PZNetReachability sharedInstance] beginNetReach];
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     

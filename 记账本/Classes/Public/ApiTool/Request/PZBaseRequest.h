@@ -24,7 +24,7 @@ typedef NS_ENUM(NSUInteger,PZRequestSerializerType) {
 @optional
 -(void)requestSuccessWithRequest:(__kindof PZBaseRequest *)request;
 -(void)requestFailedWithRequest:(__kindof PZBaseRequest *)request;
-
+-(void)requestFailedWithNetworkUnConnected;
 @end
 
 @protocol ReformerProtocol <NSObject>

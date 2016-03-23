@@ -147,7 +147,12 @@ static NSString *kPZCostListCellID = @"kPZCostListCellID";
 }
 
 -(void)requestFailedWithRequest:(__kindof PZBaseRequest *)request{
-  
+   
+}
+
+-(void)requestFailedWithNetworkUnConnected
+{
+    NSLog(@"对不起，没有网络");
 }
 #pragma  mark  getter setter
 

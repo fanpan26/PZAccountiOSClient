@@ -284,6 +284,7 @@
 		2C89DD6F1CA2E33300325891 /* PZNetWorkAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C89DD6D1CA2E33300325891 /* PZNetWorkAgent.m */; };
 		2C89DD721CA2E37A00325891 /* PZAccountRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C89DD711CA2E37A00325891 /* PZAccountRequest.m */; };
 		2C89DD751CA2E53B00325891 /* PZRequestConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C89DD741CA2E53B00325891 /* PZRequestConfig.m */; };
+		2C89DD781CA2F4FB00325891 /* PZNetReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C89DD771CA2F4FB00325891 /* PZNetReachability.m */; };
 		2C9104591C7B5DA500F5C84E /* libopencore-amrnb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C9104561C7B5DA500F5C84E /* libopencore-amrnb.a */; };
 		2C91045A1C7B5DA500F5C84E /* release_notes_ios.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2C9104571C7B5DA500F5C84E /* release_notes_ios.txt */; };
 		2C91045B1C7B5DA500F5C84E /* RongIMLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C9104581C7B5DA500F5C84E /* RongIMLib.framework */; };
@@ -888,6 +889,8 @@
 		2C89DD711CA2E37A00325891 /* PZAccountRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PZAccountRequest.m; sourceTree = "<group>"; };
 		2C89DD731CA2E53B00325891 /* PZRequestConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PZRequestConfig.h; sourceTree = "<group>"; };
 		2C89DD741CA2E53B00325891 /* PZRequestConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PZRequestConfig.m; sourceTree = "<group>"; };
+		2C89DD761CA2F4FB00325891 /* PZNetReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PZNetReachability.h; sourceTree = "<group>"; };
+		2C89DD771CA2F4FB00325891 /* PZNetReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PZNetReachability.m; sourceTree = "<group>"; };
 		2C9104561C7B5DA500F5C84E /* libopencore-amrnb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libopencore-amrnb.a"; sourceTree = "<group>"; };
 		2C9104571C7B5DA500F5C84E /* release_notes_ios.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes_ios.txt; sourceTree = "<group>"; };
 		2C9104581C7B5DA500F5C84E /* RongIMLib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RongIMLib.framework; sourceTree = "<group>"; };
@@ -2381,6 +2384,8 @@
 				2C89DD6D1CA2E33300325891 /* PZNetWorkAgent.m */,
 				2C89DD731CA2E53B00325891 /* PZRequestConfig.h */,
 				2C89DD741CA2E53B00325891 /* PZRequestConfig.m */,
+				2C89DD761CA2F4FB00325891 /* PZNetReachability.h */,
+				2C89DD771CA2F4FB00325891 /* PZNetReachability.m */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -3611,6 +3616,7 @@
 				2C29570F1C73724D00E5A194 /* MSSummaryController.m in Sources */,
 				2C89DD651CA2D99D00325891 /* PZGetAccountListReformer.m in Sources */,
 				2C2958321C737C7900E5A194 /* UIView+MJExtension.m in Sources */,
+				2C89DD781CA2F4FB00325891 /* PZNetReachability.m in Sources */,
 				2CDAFE241C9702790067B2F6 /* PZHomeController.m in Sources */,
 				2CCEAA4E1CA032B900168C4D /* UIBarButtonItem+MJ.m in Sources */,
 				2C2958211C737C7900E5A194 /* MJRefreshBackFooter.m in Sources */,
