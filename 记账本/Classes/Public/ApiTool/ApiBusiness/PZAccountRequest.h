@@ -12,4 +12,5 @@
 
 @property(nonatomic,strong,readonly) NSString *op;
 
+@property(nonatomic,assign,readonly) NSUInteger userid;
 @end

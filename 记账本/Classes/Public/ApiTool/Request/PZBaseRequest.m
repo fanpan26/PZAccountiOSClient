@@ -7,6 +7,14 @@
 //
 
 #import "PZBaseRequest.h"
+#import "PZResponseValidate.h"
+#import "PZRequestConfig.h"
+
+@interface PZBaseRequest()
+{
+    PZResponseValidate *_validate;
+}
+@end
 
 @implementation PZBaseRequest
 /*
@@ -18,6 +26,14 @@
  @property(nonatomic,strong,readonly) NSDictionary *params;
  @property(nonatomic,assign,readonly) PZRequestSerializerType serializerType;
  */
+
+-(instancetype)init
+{
+    if (self = [super init]) {
+        _validate = [[PZResponseValidate alloc] init];
+    }
+    return self;
+}
 
 -(NSString *)apiDomain
 {
@@ -49,12 +65,22 @@
     return nil;
 }
 
--(NSDictionary *)fetchDataWithReformer:(id<ReformerProtocol>)reformer
+-(id)fetchDataWithReformer:(id<ReformerProtocol>)reformer
 {
     if (reformer == nil) {
         return self.responseObject;
     } else {
-        return [reformer reformDataWithManager:self];
+        return [reformer reformDataWithRequest:self];
+    }
+}
+
+-(void)setResponseObject:(id)responseObject
+{
+    BOOL needValidate = [[PZRequestConfig sharedConfig] needValidateResponseObject];
+    if (needValidate) {
+        _responseObject = [_validate validateWithData:responseObject];
+    }else{
+        _responseObject = responseObject;
     }
 }
 

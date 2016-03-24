@@ -18,6 +18,9 @@
 
 #import "PZGetAccountListReformer.h"
 
+#import "PZAccountItem.h"
+#import "PZRequestResult.h"
+
 static NSString *kPZCostListCellID = @"kPZCostListCellID";
 
 @interface PZHomeCostListController()<PZAddCostViewDelegate,PZBaseRequestDelegate>
@@ -38,19 +41,19 @@ static NSString *kPZCostListCellID = @"kPZCostListCellID";
     [super viewDidLoad];
     [self.tableView registerClass:[PZCostListCell class] forCellReuseIdentifier:kPZCostListCellID];
     self.tableView.rowHeight = 70;
+    [self loadData];
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self loadData];
 }
 
+#pragma mark private methods
 -(void)buildUI
 {
     [super buildUI];
-    self.title = @"首页";
-     //self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithIcon:@"iconfont-leimu" highlightedIcon:@"iconfont-leimu-selected" target:self action:@selector(leftClicked:)];
+    self.title = @"消费支出";
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithIcon:@"iconfont-jia" highlightedIcon:@"iconfont-jia-selected" target:self action:@selector(rightClicked:)];
    
 }
@@ -80,15 +83,12 @@ static NSString *kPZCostListCellID = @"kPZCostListCellID";
 
 -(void)loadData
 {
-    for(int i = 0;i<100;i++)
-    {
-    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    dict[@"time"] = @"2016-3-14";
-    dict[@"detail"] = @"[转账]消费的详细信息";
-    dict[@"photo"] = @"http://qlogo3.store.qq.com/qzone/645857874/645857874/100?1440900705";
-    dict[@"name"] = @"范月盘";
-    [self.arrayCostList addObject:dict];
-    }
+    PZNetWorkAgent *agent = [[PZNetWorkAgent alloc] init];
+    //内部根据requestId做识别码（待优化）
+    PZGetAccountListRequest *request = [[PZGetAccountListRequest alloc] init];
+    request.delegate = self;
+    [agent startWithBaseRequest:request];
+    
 }
 
 
@@ -106,7 +106,7 @@ static NSString *kPZCostListCellID = @"kPZCostListCellID";
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     PZCostListCell *cell = [tableView dequeueReusableCellWithIdentifier:kPZCostListCellID];
-    cell.dict = self.arrayCostList[indexPath.row];
+    cell.accountDetail = self.arrayCostList[indexPath.row];
     cell.myTableView = tableView;
     cell.indexPath = indexPath;
     return cell;
@@ -126,24 +126,28 @@ static NSString *kPZCostListCellID = @"kPZCostListCellID";
 #pragma mark costview delegate
 -(void)costView:(PZAddCostView *)costView didSelectCellWithIdentifier:(NSString *)identifier
 {
+    //消费信息
     if ([identifier isEqualToString:kPZAddCostTypeCodeCost]) {
         MSAddController *controller = [[MSAddController alloc] init];
         controller.type = MSAddViewTypeEveryDay;
         [self.navigationController presentViewController:controller animated:YES completion:nil];
     }
+    //添加余额信息
     if ([identifier isEqualToString:kPZAddCostTypeCodeLast]) {
-        PZNetWorkAgent *agent = [[PZNetWorkAgent alloc] init];
-        PZGetAccountListRequest *request = [[PZGetAccountListRequest alloc] initWithUserId:3];
-        request.delegate = self;
-        [agent startWithBaseRequest:request];
     }
 }
 
 
 -(void)requestSuccessWithRequest:(__kindof PZBaseRequest *)request
 {
-    NSDictionary *dict = [request fetchDataWithReformer:self.getAccountListReformer];
-    NSLog(@"%@",dict);
+   PZRequestResult *result = [request fetchDataWithReformer:self.getAccountListReformer];
+    if (result.isSuccessData) {
+        self.arrayCostList = result.data;
+        [self.tableView reloadData];
+    }else{
+        NSLog(@"%@",result.data);
+    }
+
 }
 
 -(void)requestFailedWithRequest:(__kindof PZBaseRequest *)request{

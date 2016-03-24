@@ -8,9 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import "PZBaseRequest.h"
+#import "PZRequestResult.h"
 
 @interface PZBaseReformer : NSObject<ReformerProtocol>
 
-- (NSDictionary *)reformData:(id)originData fromRequest:(PZBaseRequest *)request;
+-(PZRequestResult *) reformData:(id)originData fromRequest:(PZBaseRequest *)request;
+
+-(BOOL)isSuccessData:(id)originData;
 
 @end

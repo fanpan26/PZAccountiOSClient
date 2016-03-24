@@ -10,6 +10,17 @@
 
 @implementation PZRequestConfig
 
++(instancetype)sharedConfig
+{
+    static PZRequestConfig *_config;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _config  = [[PZRequestConfig alloc] init];
+    });
+    return _config;
+    
+}
+
 -(NSString *)defaultApiDomain
 {
     return @"http://imfyp.com";
@@ -30,6 +41,11 @@
     return @{
         @"token":@"123123"
     };
+}
+
+-(BOOL)needValidateResponseObject
+{
+    return YES;
 }
 
 @end

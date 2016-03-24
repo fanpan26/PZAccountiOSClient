@@ -10,7 +10,8 @@
 
 @interface PZGetAccountListRequest()
 {
-    NSUInteger _userid;
+    NSUInteger _pageindex;
+    NSUInteger _pagesize;
 }
 
 @end
@@ -21,22 +22,41 @@
 -(instancetype)initWithUserId:(NSUInteger)userid
 {
     if (self = [super init]) {
-        _userid = userid;
+        _pageindex = 1;
+        _pagesize = 20;
     }
     return self;
 }
 
+-(instancetype)init
+{
+    return  [self initWithUserId:0];
+}
+
 -(NSString *)op
 {
-    return @"user_summary";
+    return @"user_cost_list";
+}
+
+-(NSUInteger)userid
+{
+    return 0;
 }
 
 -(NSDictionary *)params
 {
     return @{
-        @"operate_user":@(_userid),
+        @"operate_user":@(self.userid),
+        @"page_index":@(_pageindex),
+        @"page_size":@(_pagesize)
     };
 }
+
+-(void)loadNextPage
+{}
+
+-(void)refreshData
+{}
 
 
 

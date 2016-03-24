@@ -12,4 +12,8 @@
 
 -(instancetype)initWithUserId:(NSUInteger)userid;
 
+
+-(void)loadNextPage;
+
+-(void)refreshData;
 @end

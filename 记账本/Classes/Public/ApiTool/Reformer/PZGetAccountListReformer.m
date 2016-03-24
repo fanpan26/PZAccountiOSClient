@@ -8,29 +8,30 @@
 
 #import "PZGetAccountListReformer.h"
 #import "PZGetAccountListRequest.h"
+#import "PZAccountItem.h"
 
 @implementation PZGetAccountListReformer
 
--(NSDictionary *)reformDataWithManager:(PZBaseRequest *)request
-{
-    return [self reformData:request.responseObject fromRequest:request];
-}
 
-
-- (NSDictionary *)reformData:(id)originData fromRequest:(PZBaseRequest *)request
+- (PZRequestResult *)reformData:(id)originData fromRequest:(PZBaseRequest *)request
 {
-    if ([originData[@"code"] isEqualToString:@"err"]) {
-        return nil;
+    id data;
+    if (originData) {
+        NSMutableArray *array = [NSMutableArray array];
+        if ([self isSuccessData:originData]) {
+            NSArray *dictArray =  originData[@"data"];
+            [dictArray enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                PZAccountItem *item = [[PZAccountItem alloc] initWithDictionary:obj];
+                [array addObject:item];
+            }];
+            data = array;
+        }else{
+             data = originData[@"data"];
+        }
+        PZRequestResult *result = [[PZRequestResult alloc] initWithCode:originData[@"code"] data:data];
+        return  result;
     }
-    NSDictionary *resultData = nil;
-    if ([request isKindOfClass:[PZGetAccountListRequest class]]) {
-        resultData = @{
-            @"userid":originData[@"data"][@"user"][@"user_id"],
-            @"username":originData[@"data"][@"user"][@"user_name"],
-            @"userphoto":originData[@"data"][@"user"][@"user_photo"]
-        };
-    }
-    return resultData;
+    return  nil;
 }
 
 @end

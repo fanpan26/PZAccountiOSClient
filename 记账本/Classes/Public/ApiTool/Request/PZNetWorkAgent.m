@@ -86,23 +86,43 @@
     if ([type isEqualToString:@"GET"]) {
         [_manager GET:path parameters:dictionary progress:nil
                                success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                                   
                                    if(delegate && [delegate respondsToSelector:@selector(requestSuccessWithRequest:)]){
+                                       NSLog(@"%@",responseObject);
+                                       NSLog(@"%@",[responseObject class]);
                                        _request.responseObject = responseObject;
                                        [delegate requestSuccessWithRequest:_request];
                                    }
                                    
                                }
                                failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                                   
+                                   NSLog(@"%@",error);
                                    if (delegate && [delegate respondsToSelector:@selector(requestFailedWithRequest:)]) {
                                        _request.error = error;
                                        [delegate requestFailedWithRequest:_request];
                                    }
+                                   
                                }];
     }else if([type isEqualToString:@"POST"]){
         [_manager POST:path parameters:dictionary progress:nil
                                 success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                                                                    }
+                                   
+                                    if(delegate && [delegate respondsToSelector:@selector(requestSuccessWithRequest:)]){
+                                        NSLog(@"%@",responseObject);
+                                        NSLog(@"%@",[responseObject class]);
+                                        _request.responseObject = responseObject;
+                                        [delegate requestSuccessWithRequest:_request];
+                                    }
+                                    
+                                }
                                 failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                                    
+                                    NSLog(@"%@",error);
+                                    if (delegate && [delegate respondsToSelector:@selector(requestFailedWithRequest:)]) {
+                                        _request.error = error;
+                                        [delegate requestFailedWithRequest:_request];
+                                    }
                                     
                                 }];
     }

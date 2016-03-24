@@ -30,7 +30,7 @@
     //主页
     PZHomeCostListController *homeChild = [[PZHomeCostListController alloc] initWithStyle:UITableViewStylePlain];
     MSNavigationController *home = [[MSNavigationController alloc] initWithRootViewController:homeChild];
-    home.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"首页" image:[UIImage imageNamed:@"TabBar_HomeBar"] tag:1];
+    home.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"消费支出" image:[UIImage imageNamed:@"TabBar_HomeBar"] tag:1];
     [childControllers addObject:home];
     
     //汇总

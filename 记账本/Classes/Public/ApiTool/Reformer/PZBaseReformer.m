@@ -10,8 +10,23 @@
 
 @implementation PZBaseReformer
 
--(NSDictionary *)reformData:(id)originData fromRequest:(PZBaseRequest *)request
+-(PZRequestResult *)reformDataWithRequest:(PZBaseRequest *)request
+{
+    return [self reformData:request.responseObject fromRequest:request];
+}
+
+-(PZRequestResult *)reformData:(id)originData fromRequest:(PZBaseRequest *)request
 {
     return  nil;
 }
+
+
+-(BOOL)isSuccessData:(id)originData
+{
+    if (originData) {
+        return [originData[@"code"] isEqualToString:@"ok"];
+    }
+    return NO;
+}
+
 @end

@@ -8,9 +8,11 @@
 
 #import "MSBaseCell.h"
 
+@class PZAccountItem;
 @interface PZCostListCell : MSBaseCell
-
-@property(nonatomic,strong) NSDictionary *dict;
+//
+//@property(nonatomic,strong) NSDictionary *dict;
+@property(nonatomic,strong) PZAccountItem *accountDetail;
 
 @property(nonatomic,strong) NSIndexPath *indexPath;
 @property(nonatomic,weak)UITableView *myTableView;

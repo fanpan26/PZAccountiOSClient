@@ -12,6 +12,7 @@
 #import "PZConfigFrame.h"
 #import "MSCommon.h"
 #import "UIImage+MS.h"
+#import "PZAccountItem.h"
 
 @interface PZCostListCell()
 
@@ -118,14 +119,23 @@
     frame.size.height = 70;
     [super setFrame:frame];
 }
+//
+//-(void)setDict:(NSDictionary *)dict
+//{
+//    _dict = dict;
+//    [self.photoView setImage:dict[@"photo"]];
+//    self.nameLabel.text = dict[@"name"];
+//    self.timeLabel.text = dict[@"time"];
+//    self.detailLabel.text = dict[@"detail"];
+//}
 
--(void)setDict:(NSDictionary *)dict
+-(void)setAccountDetail:(PZAccountItem *)accountDetail
 {
-    _dict = dict;
-    [self.photoView setImage:dict[@"photo"]];
-    self.nameLabel.text = dict[@"name"];
-    self.timeLabel.text = dict[@"time"];
-    self.detailLabel.text = dict[@"detail"];
+    _accountDetail = accountDetail;
+    [self.photoView setImage:accountDetail.userphoto];
+    self.nameLabel.text = accountDetail.username;
+    self.timeLabel.text = accountDetail.addtime;
+    self.detailLabel.text = accountDetail.detail;
 }
 
 - (void)setIndexPath:(NSIndexPath *)indexPath

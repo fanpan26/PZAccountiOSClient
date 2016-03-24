@@ -19,6 +19,7 @@ typedef NS_ENUM(NSUInteger,PZRequestSerializerType) {
 };
 
 @class PZBaseRequest;
+@class PZRequestResult;
 @protocol PZBaseRequestDelegate <NSObject>
 
 @optional
@@ -30,7 +31,7 @@ typedef NS_ENUM(NSUInteger,PZRequestSerializerType) {
 @protocol ReformerProtocol <NSObject>
 
 @optional
--(NSDictionary *)reformDataWithManager:(PZBaseRequest *)request;
+-(PZRequestResult *)reformDataWithRequest:(PZBaseRequest *)request;
 
 @end
 
@@ -49,6 +50,6 @@ typedef NS_ENUM(NSUInteger,PZRequestSerializerType) {
 @property(nonatomic,strong) NSError *error;
 
 
--(NSDictionary *)fetchDataWithReformer:(id<ReformerProtocol>) reformer;
+-(id)fetchDataWithReformer:(id<ReformerProtocol>) reformer;
 
 @end

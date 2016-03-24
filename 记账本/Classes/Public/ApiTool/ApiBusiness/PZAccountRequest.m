@@ -7,8 +7,14 @@
 //
 
 #import "PZAccountRequest.h"
+#import "MSUserTool.h"
 
 @implementation PZAccountRequest
+
+-(NSUInteger)userid
+{
+    return  [MSUserTool  sharedMSUserTool].currentUser.userId;
+}
 
 -(NSString *)apiUrl
 {
