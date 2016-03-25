@@ -15,9 +15,15 @@
 
 #import "PZRequestResult.h"
 #import "PZSummaryReformer.h"
+
+#import "PZSummaryView.h"
+#import "Masonry.h"
+#import "MJRefresh.h"
 @interface PZSummaryController()<PZBaseRequestDelegate>
 
 @property(nonatomic,strong) PZSummaryReformer *reformer;
+@property(nonatomic,strong) PZSummaryView *summaryView;
+@property(nonatomic,strong) UIScrollView *backView;
 
 @end
 
@@ -27,7 +33,7 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     [self loadData];
 }
 -(void)buildUI
@@ -35,10 +41,21 @@
     [super buildUI];
     
     self.title = @"汇总";
-    UIView *summaryView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kMSScreenWidth, 200)];
-    summaryView.backgroundColor = [UIColor graduallyColor:200 r:238 g:86 b:29];//238 86 29
-    [self.view addSubview:summaryView];
+    [self.view addSubview:self.backView];
+    [self.backView addSubview:self.summaryView];
+    
+    [self.backView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view.mas_top);
+        make.left.equalTo(self.view.mas_left);
+        make.size.equalTo(self.view);
+    }];
+    
+    [self.summaryView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.backView.mas_top);
+        make.size.mas_equalTo(self.summaryView.viewSize);
+    }];
 }
+
 
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -47,9 +64,12 @@
 
 -(void)loadData
 {
+    [self.backView.mj_header beginRefreshing];
+    
     PZNetWorkAgent *agent = [[PZNetWorkAgent alloc] init];
     PZUserSummaryRequest *request = [[PZUserSummaryRequest alloc] init];
     request.delegate  = self;
+    
     [agent startWithBaseRequest:request];
 }
 
@@ -58,17 +78,26 @@
 -(void)requestSuccessWithRequest:(__kindof PZBaseRequest *)request
 {
     PZRequestResult *result = [request fetchDataWithReformer:self.reformer];
-    NSLog(@"%@",result.data);
+    _summaryView.data = result.data;
+    [self.backView.mj_header endRefreshing];
 }
 
 -(void)requestFailedWithRequest:(__kindof PZBaseRequest *)request
 {
-    
+    NSLog(@"哎呀，网络请求出错了呢");
+    [self.backView.mj_header endRefreshing];
+
 }
 
 -(void)requestFailedWithNetworkUnConnected
 {
     NSLog(@"没有网络哦");
+    [self.backView.mj_header endRefreshing];
+}
+
+-(void)refresh
+{
+    [self loadData];
 }
 
 #pragma mark getter setter
@@ -81,6 +110,27 @@
         _reformer = [[PZSummaryReformer alloc] init];
     }
     return _reformer;
+}
+
+-(PZSummaryView *)summaryView
+{
+    if (_summaryView == nil) {
+         _summaryView = [[PZSummaryView alloc] initWithFrame:CGRectMake(0,0, 0, 0)];
+    }
+    return _summaryView;
+}
+
+-(UIScrollView *)backView
+{
+    if (_backView == nil) {
+        _backView = [[UIScrollView alloc] initWithFrame:CGRectZero];
+        _backView.bounces = YES;
+        _backView.contentSize = self.view.bounds.size;
+        _backView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(refresh)];
+        _backView.mj_header.automaticallyChangeAlpha = YES;
+
+    }
+    return _backView;
 }
 
 

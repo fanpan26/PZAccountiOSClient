@@ -32,7 +32,7 @@
 -(instancetype)init
 {
     if (self = [super init]) {
-        _reachable = NO;
+        _reachable = YES;
     }
     return self;
 }

@@ -25,28 +25,29 @@
 }
 
 /*
- 下拉刷新要运行的方法，子类重写一定要调用super startHeadRefreshing
+ 下拉刷新要运行的方法
  */
 -(void)startHeaderRefreshing
 {
-    //开始下拉刷新
-    NSLog(@"开始下拉刷新，刷新后执行endRefreshing方法");
-    [self endHeaderRefreshing];
+    NSLog(@"开始加载数据");
+    __unsafe_unretained UITableView *_unretain_tableView = self.tableView;
+    [_unretain_tableView.mj_header beginRefreshing];
 }
 /*
- 上拉刷新要运行的方法，子类重写一定要调用super startHeadRefreshing
+ 上拉刷新要运行的方法
  */
 -(void)startFooterRefreshing
 {
     //开始上拉刷新
-    NSLog(@"开始上拉刷新，刷新后执行endRefreshing方法");
-    [self endFooterRefreshing];
+    NSLog(@"上拉刷新");
+    __unsafe_unretained UITableView *_unretain_tableView = self.tableView;
+    [_unretain_tableView.mj_footer beginRefreshing];
 }
 
 -(void)endHeaderRefreshing
 {
-        __unsafe_unretained UITableView *_unretain_tableView = self.tableView;
-        [_unretain_tableView.mj_header endRefreshing];
+    __unsafe_unretained UITableView *_unretain_tableView = self.tableView;
+    [_unretain_tableView.mj_header endRefreshing];
 }
 -(void)endFooterRefreshing
 {
@@ -60,7 +61,11 @@
     [_unretain_tableView reloadData];
 }
 
+-(void)didHeaderStartedRefresh
+{}
 
+-(void)didFooterStartedRefresh
+{}
 
 -(void)buildUI
 {
@@ -72,7 +77,7 @@
     // 下拉刷新
     _unretain_tableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         // 结束刷新
-        [_weakSelf startHeaderRefreshing];
+        [_weakSelf didHeaderStartedRefresh];
     }];
     
     // 设置自动切换透明度(在导航栏下面自动隐藏)
@@ -81,7 +86,7 @@
     // 上拉刷新
     _unretain_tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         // 结束刷新
-        [_weakSelf startFooterRefreshing];
+        [_weakSelf didFooterStartedRefresh];
     }];
 }
 
@@ -104,28 +109,6 @@
         [_hud hide:YES afterDelay:0.5];
     }
 }
-
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-}
-
--(void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-}
-
--(void)viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
-}
-
--(void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-}
-
-
 
 
 @end

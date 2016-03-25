@@ -58,9 +58,9 @@ static NSString *PZAddCostViewCellID = @"PZAddCostViewCellID";
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSLog(@"触发uitableview 事件");
     if ([self.delegate respondsToSelector:@selector(costView:didSelectCellWithIdentifier:)]) {
         [self.delegate costView:self didSelectCellWithIdentifier:self.iconIdentifiers[indexPath.row]];
-        self.hidden = YES;
     }
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -92,6 +92,7 @@ static NSString *PZAddCostViewCellID = @"PZAddCostViewCellID";
         _tableView.backgroundColor = [UIColor clearColor];
         
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _tableView.userInteractionEnabled = YES;
     }
     return  _tableView;
 }

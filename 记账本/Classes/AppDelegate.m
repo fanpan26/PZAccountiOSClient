@@ -26,23 +26,23 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-   /*即时通讯部分开始*/
-    [[RCIM sharedRCIM] initWithAppKey:kMSChatAppKey];
-    [[MSUserTool sharedMSUserTool] resetLoginIMServer];
-    //推送处理1
-    if([application respondsToSelector:@selector(registerUserNotificationSettings:)]){
-        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge | UIUserNotificationTypeAlert | UIUserNotificationTypeSound) categories:nil];
-        [application registerUserNotificationSettings:settings];
-    }
-    else{
-        UIRemoteNotificationType myTypes = UIRemoteNotificationTypeBadge |
-        UIRemoteNotificationTypeAlert |
-        UIRemoteNotificationTypeSound;
-        [application registerForRemoteNotificationTypes:myTypes];
-    }
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveMessageNotification:) name:RCKitDispatchMessageNotification object:nil];
-    [[RCIM sharedRCIM] setConnectionStatusDelegate:self];
+//   /*即时通讯部分开始*/
+//    [[RCIM sharedRCIM] initWithAppKey:kMSChatAppKey];
+//    [[MSUserTool sharedMSUserTool] resetLoginIMServer];
+//    //推送处理1
+//    if([application respondsToSelector:@selector(registerUserNotificationSettings:)]){
+//        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge | UIUserNotificationTypeAlert | UIUserNotificationTypeSound) categories:nil];
+//        [application registerUserNotificationSettings:settings];
+//    }
+//    else{
+//        UIRemoteNotificationType myTypes = UIRemoteNotificationTypeBadge |
+//        UIRemoteNotificationTypeAlert |
+//        UIRemoteNotificationTypeSound;
+//        [application registerForRemoteNotificationTypes:myTypes];
+//    }
+//    
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveMessageNotification:) name:RCKitDispatchMessageNotification object:nil];
+//    [[RCIM sharedRCIM] setConnectionStatusDelegate:self];
    /*即时通讯部分结束*/
     
     [[PZNetReachability sharedInstance] beginNetReach];

@@ -52,11 +52,15 @@
     };
 }
 
--(void)loadNextPage
-{}
+-(void)prepareLoadNextPage
+{
+    _pageindex +=1;
+}
 
--(void)refreshData
-{}
+-(void)prepareRefreshData
+{
+    _pageindex = 1;
+}
 
 
 

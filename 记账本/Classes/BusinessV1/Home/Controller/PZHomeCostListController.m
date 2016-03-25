@@ -21,14 +21,18 @@
 #import "PZAccountItem.h"
 #import "PZRequestResult.h"
 
+#import "PZLoadFailedView.h"
+
 static NSString *kPZCostListCellID = @"kPZCostListCellID";
 
-@interface PZHomeCostListController()<PZAddCostViewDelegate,PZBaseRequestDelegate>
+@interface PZHomeCostListController()<PZAddCostViewDelegate,PZBaseRequestDelegate,UIGestureRecognizerDelegate>
 {
     PZAddCostView *_costView;
+    UIView *_coverView;
 }
 @property(nonatomic,strong) NSMutableArray *arrayCostList;
 @property(nonatomic,strong) PZGetAccountListReformer *getAccountListReformer;
+@property(nonatomic,strong) PZGetAccountListRequest *request;
 
 @end
 
@@ -41,7 +45,8 @@ static NSString *kPZCostListCellID = @"kPZCostListCellID";
     [super viewDidLoad];
     [self.tableView registerClass:[PZCostListCell class] forCellReuseIdentifier:kPZCostListCellID];
     self.tableView.rowHeight = 70;
-    [self loadData];
+    [self startHeaderRefreshing];
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -50,6 +55,31 @@ static NSString *kPZCostListCellID = @"kPZCostListCellID";
 }
 
 #pragma mark private methods
+
+-(void)didHeaderStartedRefresh
+{
+    [self loadData];
+}
+
+-(void)loadData
+{
+    NSLog(@"loadData");
+    PZNetWorkAgent *agent = [[PZNetWorkAgent alloc] init];
+    [self.arrayCostList removeAllObjects];
+    //内部根据requestId做识别码（待优化）
+    [self.request prepareRefreshData];
+    [agent startWithBaseRequest:self.request];
+    
+}
+
+//加载下一页
+-(void)didFooterStartedRefresh
+{
+    PZNetWorkAgent *agent = [[PZNetWorkAgent alloc] init];
+    //内部根据requestId做识别码（待优化）
+    [self.request prepareLoadNextPage];
+    [agent startWithBaseRequest:self.request];}
+
 -(void)buildUI
 {
     [super buildUI];
@@ -60,35 +90,55 @@ static NSString *kPZCostListCellID = @"kPZCostListCellID";
 
 -(void)rightClicked:(UIBarButtonItem *)item
 {
-     UIWindow *window = [UIApplication sharedApplication].keyWindow;
     if (_costView == nil) {
+        UIView *coverView = [[UIView alloc] init];
+        coverView.backgroundColor = [UIColor clearColor];
+        
+        UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapItems:)];
+        recognizer.delegate = self;
+        [coverView addGestureRecognizer:recognizer];
+        
+        _coverView = coverView;
+        
         PZAddCostView *costView = [[PZAddCostView alloc] initWithFrame:CGRectZero];
         costView.delegate = self;
-        [window addSubview:costView];
+        
+        [self.navigationController.view addSubview:coverView];
+        [coverView addSubview:costView];
+        
+        [coverView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.navigationController.view.mas_top);
+            make.left.equalTo(self.navigationController.view.mas_left);
+            make.size.mas_equalTo(self.navigationController.view.frame.size);
+        }];
         _costView = costView;
+        CGSize size = _costView.frame.size;
+        [_costView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(coverView.mas_right).with.offset(-20);
+            make.top.equalTo(coverView.mas_top).with.offset(64);
+            make.width.mas_equalTo(size.width);
+            make.height.mas_equalTo(size.height);
+        }];
     }else{
-        _costView.hidden = !_costView.hidden;
+        _coverView.hidden = !_coverView.hidden;
     }
     
-    CGSize size = _costView.frame.size;
-    [_costView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(window.mas_right).with.offset(-20);
-        make.top.equalTo(window.mas_top).with.offset(64);
-        make.width.mas_equalTo(size.width);
-        make.height.mas_equalTo(size.height);
-    }];
-
+    
 }
 
-
--(void)loadData
+-(void)tapItems:(UITapGestureRecognizer *)recognizer
 {
-    PZNetWorkAgent *agent = [[PZNetWorkAgent alloc] init];
-    //内部根据requestId做识别码（待优化）
-    PZGetAccountListRequest *request = [[PZGetAccountListRequest alloc] init];
-    request.delegate = self;
-    [agent startWithBaseRequest:request];
-    
+    _coverView.hidden = YES;
+}
+
+#pragma mark gesture delegate
+-(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    // 若为UITableViewCellContentView（即点击了tableViewCell），则不截获Touch事件
+    if ([NSStringFromClass([touch.view class]) isEqualToString:@"UITableViewCellContentView"]) {
+        return NO;
+    }
+    return  YES;
 }
 
 
@@ -114,13 +164,13 @@ static NSString *kPZCostListCellID = @"kPZCostListCellID";
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    _costView.hidden = YES;
+    //_costView.hidden = YES;
 }
 
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [_costView setHidden:YES];
+    [_coverView setHidden:YES];
 }
 
 #pragma mark costview delegate
@@ -142,21 +192,22 @@ static NSString *kPZCostListCellID = @"kPZCostListCellID";
 {
    PZRequestResult *result = [request fetchDataWithReformer:self.getAccountListReformer];
     if (result.isSuccessData) {
-        self.arrayCostList = result.data;
-        [self.tableView reloadData];
-    }else{
-        NSLog(@"%@",result.data);
+        [self.arrayCostList addObjectsFromArray: result.data];
+        [self reloadData];
     }
-
+    [self endHeaderRefreshing];
+    [self endFooterRefreshing];
 }
 
 -(void)requestFailedWithRequest:(__kindof PZBaseRequest *)request{
-   
+    [self endHeaderRefreshing];
+    [self endFooterRefreshing];
 }
 
 -(void)requestFailedWithNetworkUnConnected
 {
-    NSLog(@"对不起，没有网络");
+    [self endHeaderRefreshing];
+    [self endFooterRefreshing];
 }
 #pragma  mark  getter setter
 
@@ -174,6 +225,15 @@ static NSString *kPZCostListCellID = @"kPZCostListCellID";
         _getAccountListReformer = [[PZGetAccountListReformer alloc] init];
     }
     return _getAccountListReformer;
+}
+
+-(PZGetAccountListRequest *)request
+{
+    if (_request == nil) {
+        _request = [[PZGetAccountListRequest alloc] init];
+        _request.delegate = self;
+    }
+    return _request;
 }
 
 @end

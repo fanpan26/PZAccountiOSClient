@@ -44,6 +44,7 @@
 
             [request.delegate requestFailedWithNetworkUnConnected];
         }
+        return;
     }
     NSString *type;
     if (request.requestType == PZRequestTypeGet) {

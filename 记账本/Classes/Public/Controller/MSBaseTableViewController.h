@@ -13,7 +13,14 @@
 
 -(void)startHeaderRefreshing;
 -(void)startFooterRefreshing;
+
+-(void)endHeaderRefreshing;
+-(void)endFooterRefreshing;
+
 -(void)reloadData;
+
+-(void)didHeaderStartedRefresh;
+-(void)didFooterStartedRefresh;
 
 -(void)showLoading;
 -(void)hideLoading;

@@ -42,41 +42,8 @@
     fmt.dateFormat = @"yyyy-MM-dd HH:mm:ss";
     fmt.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
     NSDate *date = [fmt dateFromString:time];
-    
-    
-    fmt.dateFormat = @"MM-dd HH:mm";
-    //return [fmt stringFromDate:date];
-    //    // 2.获得当前时间
-        NSDate *now = [NSDate date];
-    
-        // 3.获得当前时间和微博发送时间的间隔（差多少秒）
-        NSTimeInterval delta = [now timeIntervalSinceDate:date];
-    
-        // 4.根据时间间隔算出合理的字符串
-//        if (delta < 60) { // 1分钟内
-//            return @"刚刚";
-//        } else if (delta < 60 * 60) { // 1小时内
-//            return [NSString stringWithFormat:@"%.f分钟前", delta/60];
-//        } else if (delta < 60 * 60 * 24) { // 1天内
-//            return [NSString stringWithFormat:@"%.f小时前", delta/60/60];
-//        } else {
-//            fmt.dateFormat = @"yyyy-MM-dd";
-//            return [fmt stringFromDate:date];
-//        }
-    //一天内
-    if (delta < 60 * 60 * 24) {
-        return  @"今天";
-    }
-    //一周内
-    NSUInteger todayIndex = [self weekdayOfIndexFromDate:now];
-    NSUInteger dayCount = todayIndex - 1;
 
-    if (delta < 60 * 60 * 24 * dayCount) {
-        return [self weekdayStringFromDate:date];
-    }
-    
-   // fmt.dateFormat = @"yyyy-MM-dd";
-    return [fmt stringFromDate:date];
+    return  [self compareDate:date] ;
 }
 
 
@@ -85,12 +52,12 @@
  */
  -(NSString *)weekdayStringFromDate:(NSDate *)inputDate {
      NSArray *weekdays = @[ @"",@"星期日", @"星期一", @"星期二", @"星期三", @"星期四", @"星期五", @"星期六"];
-     NSUInteger index = [self weekdayOfIndexFromDate:inputDate];
+     NSUInteger index = [self dateComponentsFromDate:inputDate].weekday ;
      return [weekdays objectAtIndex:index];
      
 }
 
--(NSInteger)weekdayOfIndexFromDate:(NSDate *)date
+-(NSDateComponents *)dateComponentsFromDate:(NSDate *)date
 {
     
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
@@ -102,9 +69,45 @@
     NSCalendarUnit calendarUnit = NSCalendarUnitWeekday;
     
     NSDateComponents *theComponents = [calendar components:calendarUnit fromDate:date];
-    
-    return theComponents.weekday;
+    return theComponents;
    
+}
+
+-(NSString *)compareDate:(NSDate *)date{
+    
+    NSTimeInterval secondsPerDay = 24 * 60 * 60;
+    NSDate *today = [[NSDate alloc] init];
+    static dispatch_once_t onceToken;
+    static NSDateFormatter *_formatter;
+    dispatch_once(&onceToken, ^{
+        _formatter = [[NSDateFormatter alloc] init];
+        _formatter.dateFormat = @"yyyy-MM-dd";
+    });
+    NSString * todayString = [_formatter stringFromDate:today];
+    NSDate *tomorrow, *yesterday;
+    
+    tomorrow = [today dateByAddingTimeInterval: secondsPerDay];
+    yesterday = [today dateByAddingTimeInterval: -secondsPerDay];
+    
+    NSString * yesterdayString = [_formatter stringFromDate:yesterday];
+    
+    NSString * dateString = [_formatter stringFromDate:date];
+    if ([dateString isEqualToString:todayString])
+    {
+        return @"今天";
+    } else if ([dateString isEqualToString:yesterdayString])
+    {
+        return @"昨天";
+    }
+    else
+    {
+        NSTimeInterval detla = [today timeIntervalSinceDate:date];
+        if (detla < 4 * 24 * 60 * 60) {
+             return [self weekdayStringFromDate:date];
+        }
+        return dateString;
+       
+    }
 }
 
 
