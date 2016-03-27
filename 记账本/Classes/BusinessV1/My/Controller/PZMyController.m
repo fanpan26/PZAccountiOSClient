@@ -106,6 +106,7 @@
 {
     PZAccountDetailType type = [self.accountTypes[indexPath.row] integerValue];
     float money = [self.accountMoneys[indexPath.row] floatValue];
+    NSLog(@"%f",money);
     PZAccountDetailCell *cell = [PZAccountDetailCell cellWithType:type money:money inTableView:tableView atIndexPath:indexPath];
     return cell;
 }

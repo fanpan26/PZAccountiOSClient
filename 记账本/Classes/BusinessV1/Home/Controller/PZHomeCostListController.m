@@ -34,6 +34,8 @@ static NSString *kPZCostListCellID = @"kPZCostListCellID";
 @property(nonatomic,strong) PZGetAccountListReformer *getAccountListReformer;
 @property(nonatomic,strong) PZGetAccountListRequest *request;
 
+@property(nonatomic,assign) BOOL isRefreshNewData;
+
 @end
 
 @implementation PZHomeCostListController
@@ -45,7 +47,9 @@ static NSString *kPZCostListCellID = @"kPZCostListCellID";
     [super viewDidLoad];
     [self.tableView registerClass:[PZCostListCell class] forCellReuseIdentifier:kPZCostListCellID];
     self.tableView.rowHeight = 70;
-    [self startHeaderRefreshing];
+    
+    [self showTitleLoading];
+    [self loadData];
     
 }
 
@@ -63,9 +67,8 @@ static NSString *kPZCostListCellID = @"kPZCostListCellID";
 
 -(void)loadData
 {
-    NSLog(@"loadData");
     PZNetWorkAgent *agent = [[PZNetWorkAgent alloc] init];
-    [self.arrayCostList removeAllObjects];
+    self.isRefreshNewData = YES;
     //内部根据requestId做识别码（待优化）
     [self.request prepareRefreshData];
     [agent startWithBaseRequest:self.request];
@@ -76,6 +79,7 @@ static NSString *kPZCostListCellID = @"kPZCostListCellID";
 -(void)didFooterStartedRefresh
 {
     PZNetWorkAgent *agent = [[PZNetWorkAgent alloc] init];
+    self.isRefreshNewData = NO;
     //内部根据requestId做识别码（待优化）
     [self.request prepareLoadNextPage];
     [agent startWithBaseRequest:self.request];}
@@ -83,9 +87,8 @@ static NSString *kPZCostListCellID = @"kPZCostListCellID";
 -(void)buildUI
 {
     [super buildUI];
-    self.title = @"消费支出";
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithIcon:@"iconfont-jia" highlightedIcon:@"iconfont-jia-selected" target:self action:@selector(rightClicked:)];
-   
+    
 }
 
 -(void)rightClicked:(UIBarButtonItem *)item
@@ -187,25 +190,35 @@ static NSString *kPZCostListCellID = @"kPZCostListCellID";
     }
 }
 
+#pragma  mark network delegate
 
 -(void)requestSuccessWithRequest:(__kindof PZBaseRequest *)request
 {
-   PZRequestResult *result = [request fetchDataWithReformer:self.getAccountListReformer];
+    if(self.isRefreshNewData){
+        [self.arrayCostList removeAllObjects];
+    }
+    PZRequestResult *result = [request fetchDataWithReformer:self.getAccountListReformer];
     if (result.isSuccessData) {
         [self.arrayCostList addObjectsFromArray: result.data];
         [self reloadData];
     }
+    [self hideTitleLoadingWithTitle:@"消费支出"];
     [self endHeaderRefreshing];
     [self endFooterRefreshing];
 }
 
 -(void)requestFailedWithRequest:(__kindof PZBaseRequest *)request{
-    [self endHeaderRefreshing];
-    [self endFooterRefreshing];
+    [self didReceiveRequestFailed];
 }
 
 -(void)requestFailedWithNetworkUnConnected
 {
+    [self didReceiveRequestFailed];
+}
+
+-(void)didReceiveRequestFailed
+{
+    [self hideTitleLoadingWithTitle:@"加载失败"];
     [self endHeaderRefreshing];
     [self endFooterRefreshing];
 }
