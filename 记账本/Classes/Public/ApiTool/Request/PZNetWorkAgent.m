@@ -17,15 +17,29 @@
     PZBaseRequest *_request;
     PZRequestConfig *_config;
 }
+/**
+ *  存放request的缓存
+ */
+@property(nonatomic,strong) NSMutableDictionary *requestStore;
 
 @end
 
 @implementation PZNetWorkAgent
 
++(instancetype)sharedAgent
+{
+    static PZNetWorkAgent *_agent;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _agent = [[PZNetWorkAgent alloc] init];
+    });
+    return  _agent;
+}
+
 -(instancetype)init
 {
     if (self = [super init]) {
-        _manager = [AFHTTPSessionManager manager];
+       // _manager = [AFHTTPSessionManager manager];
         _config = [[PZRequestConfig alloc] init];
     }
     return self;
@@ -38,6 +52,7 @@
 -(void)startWithBaseRequest:(PZBaseRequest *)request
 {
     _request = request;
+    //根据requestID获取相应的manager
     
     if (![[PZNetReachability sharedInstance] netReachable]) {
         if (request.delegate && [request.delegate respondsToSelector:@selector(requestFailedWithNetworkUnConnected)]) {
@@ -128,6 +143,20 @@
                                 }];
     }
     
+}
+
+-(void)clearAllRequests
+{
+    [self.requestStore removeAllObjects];
+    self.requestStore = nil;
+}
+
+-(NSMutableDictionary *)requestStore
+{
+    if (_requestStore == nil) {
+        _requestStore = [NSMutableDictionary dictionary];
+    }
+    return  _requestStore;
 }
 
 @end

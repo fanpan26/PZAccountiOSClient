@@ -14,7 +14,11 @@
 @class PZBaseRequest;
 @interface PZNetWorkAgent : NSObject
 
++(instancetype)sharedAgent;
+
 -(void)startWithBaseRequest:(PZBaseRequest *)request;
 
+
+-(void)clearAllRequests;
 
 @end

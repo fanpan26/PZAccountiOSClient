@@ -39,6 +39,8 @@ typedef NS_ENUM(NSUInteger,PZRequestSerializerType) {
 
 @property(nonatomic,weak) id<PZBaseRequestDelegate> delegate;
 
+
+@property(nonatomic,strong,readonly) NSString *requestId;
 @property(nonatomic,strong,readonly) NSString *apiDomain;
 @property(nonatomic,strong,readonly) NSString *apiUrl;
 @property(nonatomic,assign,readonly) PZRequestType requestType;

@@ -35,6 +35,11 @@
     return self;
 }
 
+-(NSString *)requestId
+{
+    return  [NSString stringWithFormat:@"pz_request_%@",NSStringFromClass([self class])];
+}
+
 -(NSString *)apiDomain
 {
     return @"http://imfyp.com";

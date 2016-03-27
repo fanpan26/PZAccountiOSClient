@@ -197,6 +197,7 @@ static NSString *kPZCostListCellID = @"kPZCostListCellID";
     if(self.isRefreshNewData){
         [self.arrayCostList removeAllObjects];
     }
+    
     PZRequestResult *result = [request fetchDataWithReformer:self.getAccountListReformer];
     if (result.isSuccessData) {
         [self.arrayCostList addObjectsFromArray: result.data];
