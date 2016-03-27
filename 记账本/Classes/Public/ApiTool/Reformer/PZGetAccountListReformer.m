@@ -28,7 +28,7 @@
         }else{
              data = originData[@"data"];
         }
-        PZRequestResult *result = [[PZRequestResult alloc] initWithCode:originData[@"code"] data:data];
+        PZRequestResult *result = [[PZRequestResult alloc] initWithCode:[self codeWithData:originData] data:data];
         return  result;
     }
     return  nil;

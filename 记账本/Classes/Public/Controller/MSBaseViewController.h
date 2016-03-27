@@ -15,4 +15,9 @@
 -(void)setLeftButtonWithTitle:(NSString *)title image:(NSString *)image;
 -(void)setRightButtonWithTitle:(NSString *)title image:(NSString *)image;
 
+
+-(void)showTitleLoading;
+-(void)hideTitleLoading;
+
+-(void)hideTitleLoadingWithTitle:(NSString *)title;
 @end

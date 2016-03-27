@@ -16,4 +16,6 @@
 
 -(BOOL)isSuccessData:(id)originData;
 
+-(NSString *)codeWithData:(id)originData;
+
 @end

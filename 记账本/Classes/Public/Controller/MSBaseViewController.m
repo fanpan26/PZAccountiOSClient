@@ -6,7 +6,15 @@
 //  Copyright © 2016年 fyp. All rights reserved.
 //
 
+
 #import "MSBaseViewController.h"
+
+#import "PZLoadingNavigationTitle.h"
+@interface MSBaseViewController()
+
+@property(nonatomic,strong) PZLoadingNavigationTitle *loadingTitleView;
+
+@end
 
 @implementation MSBaseViewController
 
@@ -41,4 +49,39 @@
     [button setImage:bselectedImage forState:UIControlStateHighlighted];
     return button;
 }
+
+
+-(void)showTitleLoading
+{
+    if (!self.navigationItem.titleView) {
+        self.navigationItem.titleView = self.loadingTitleView;
+    }
+    [self.loadingTitleView startAnimation];
+}
+
+-(void)hideTitleLoading
+{
+    [self hideTitleLoadingWithTitle:nil];
+}
+
+-(void)hideTitleLoadingWithTitle:(NSString *)title
+{
+    [self.loadingTitleView stopAnimation];
+    if (title) {
+        self.title = title;
+    }
+    if (self.navigationItem.titleView) {
+        [self.navigationItem.titleView removeFromSuperview];
+        self.navigationItem.titleView = nil;
+    }
+}
+
+-(PZLoadingNavigationTitle *)loadingTitleView
+{
+    if (_loadingTitleView == nil) {
+        _loadingTitleView =[[PZLoadingNavigationTitle alloc] initWithTitle:@"加载中..."];
+    }
+    return _loadingTitleView;
+}
+
 @end

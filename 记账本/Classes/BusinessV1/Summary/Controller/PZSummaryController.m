@@ -33,7 +33,8 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
+    [self showTitleLoading];
     [self loadData];
 }
 -(void)buildUI
@@ -64,8 +65,6 @@
 
 -(void)loadData
 {
-    [self.backView.mj_header beginRefreshing];
-    
     PZNetWorkAgent *agent = [[PZNetWorkAgent alloc] init];
     PZUserSummaryRequest *request = [[PZUserSummaryRequest alloc] init];
     request.delegate  = self;
@@ -79,12 +78,15 @@
 {
     PZRequestResult *result = [request fetchDataWithReformer:self.reformer];
     _summaryView.data = result.data;
+    
+    [self hideTitleLoadingWithTitle:@"汇总"];
     [self.backView.mj_header endRefreshing];
 }
 
 -(void)requestFailedWithRequest:(__kindof PZBaseRequest *)request
 {
     NSLog(@"哎呀，网络请求出错了呢");
+    [self hideTitleLoadingWithTitle:@"加载失败"];
     [self.backView.mj_header endRefreshing];
 
 }
@@ -92,6 +94,7 @@
 -(void)requestFailedWithNetworkUnConnected
 {
     NSLog(@"没有网络哦");
+    [self hideTitleLoadingWithTitle:@"加载失败"];
     [self.backView.mj_header endRefreshing];
 }
 

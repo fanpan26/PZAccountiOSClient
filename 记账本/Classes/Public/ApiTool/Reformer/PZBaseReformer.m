@@ -29,4 +29,12 @@
     return NO;
 }
 
+-(NSString *)codeWithData:(id)originData
+{
+    if (originData) {
+        return originData[@"code"];
+    }
+    return @"err";
+}
+
 @end

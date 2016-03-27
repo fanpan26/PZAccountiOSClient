@@ -10,7 +10,7 @@
 #import "MSNavigationController.h"
 #import "PZHomeCostListController.h"
 #import "PZSummaryController.h"
-#import "PZTransformController.h"
+#import "PZMyController.h"
 #import "MSMyController.h"
 #import "MSChatController.h"
 #import "MSCommon.h"
@@ -40,7 +40,7 @@
     [childControllers addObject:summary];
     
     //我的
-    PZTransformController *myChild = [[PZTransformController alloc] initWithStyle:UITableViewStylePlain];
+    PZMyController *myChild = [[PZMyController alloc] initWithStyle:UITableViewStylePlain];
     MSNavigationController *my = [[MSNavigationController alloc] initWithRootViewController:myChild];
     my.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"我的" image:[UIImage imageNamed:@"TabBar_Assets"] tag:3];
     [childControllers addObject:my];

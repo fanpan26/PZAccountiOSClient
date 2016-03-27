@@ -336,6 +336,14 @@
 		2CB5464A1C7767C10024CD80 /* MSSummaryLastView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB546491C7767C10024CD80 /* MSSummaryLastView.m */; };
 		2CB5464D1C7767D60024CD80 /* MSSummaryDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB5464C1C7767D60024CD80 /* MSSummaryDetailView.m */; };
 		2CB546501C777F960024CD80 /* MSSummaryBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB5464F1C777F960024CD80 /* MSSummaryBottomView.m */; };
+		2CC8E72C1CA8010400854F11 /* PZLoadingNavigationTitle.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC8E72B1CA8010400854F11 /* PZLoadingNavigationTitle.m */; };
+		2CC8E7321CA8013700854F11 /* PZMyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC8E7301CA8013700854F11 /* PZMyController.m */; };
+		2CC8E7351CA8014D00854F11 /* PZMyHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC8E7341CA8014D00854F11 /* PZMyHeaderView.m */; };
+		2CC8E7381CA8016200854F11 /* PZAccountDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC8E7371CA8016200854F11 /* PZAccountDetailCell.m */; };
+		2CC8E73B1CA8017500854F11 /* PZPersonalAccountDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC8E73A1CA8017500854F11 /* PZPersonalAccountDetailModel.m */; };
+		2CC8E73E1CA8018300854F11 /* PZAccountDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC8E73D1CA8018300854F11 /* PZAccountDetailModel.m */; };
+		2CC8E7411CA801A300854F11 /* PZPersonalSummaryRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC8E7401CA801A300854F11 /* PZPersonalSummaryRequest.m */; };
+		2CC8E7441CA801B600854F11 /* PZPersonalAccountReformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC8E7431CA801B600854F11 /* PZPersonalAccountReformer.m */; };
 		2CCEAA071CA0276100168C4D /* iconfont-back-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CCEA9D21CA0276100168C4D /* iconfont-back-selected.png */; };
 		2CCEAA081CA0276100168C4D /* iconfont-back-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CCEA9D31CA0276100168C4D /* iconfont-back-selected@2x.png */; };
 		2CCEAA091CA0276100168C4D /* iconfont-back.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CCEA9D41CA0276100168C4D /* iconfont-back.png */; };
@@ -977,6 +985,22 @@
 		2CB5464C1C7767D60024CD80 /* MSSummaryDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSSummaryDetailView.m; sourceTree = "<group>"; };
 		2CB5464E1C777F960024CD80 /* MSSummaryBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSSummaryBottomView.h; sourceTree = "<group>"; };
 		2CB5464F1C777F960024CD80 /* MSSummaryBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSSummaryBottomView.m; sourceTree = "<group>"; };
+		2CC8E72A1CA8010400854F11 /* PZLoadingNavigationTitle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PZLoadingNavigationTitle.h; sourceTree = "<group>"; };
+		2CC8E72B1CA8010400854F11 /* PZLoadingNavigationTitle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PZLoadingNavigationTitle.m; sourceTree = "<group>"; };
+		2CC8E72F1CA8013700854F11 /* PZMyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PZMyController.h; sourceTree = "<group>"; };
+		2CC8E7301CA8013700854F11 /* PZMyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PZMyController.m; sourceTree = "<group>"; };
+		2CC8E7331CA8014D00854F11 /* PZMyHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PZMyHeaderView.h; sourceTree = "<group>"; };
+		2CC8E7341CA8014D00854F11 /* PZMyHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PZMyHeaderView.m; sourceTree = "<group>"; };
+		2CC8E7361CA8016200854F11 /* PZAccountDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PZAccountDetailCell.h; sourceTree = "<group>"; };
+		2CC8E7371CA8016200854F11 /* PZAccountDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PZAccountDetailCell.m; sourceTree = "<group>"; };
+		2CC8E7391CA8017500854F11 /* PZPersonalAccountDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PZPersonalAccountDetailModel.h; path = "记账本/Classes/BusinessV1/My/Model/PZPersonalAccountDetailModel.h"; sourceTree = SOURCE_ROOT; };
+		2CC8E73A1CA8017500854F11 /* PZPersonalAccountDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PZPersonalAccountDetailModel.m; path = "记账本/Classes/BusinessV1/My/Model/PZPersonalAccountDetailModel.m"; sourceTree = SOURCE_ROOT; };
+		2CC8E73C1CA8018300854F11 /* PZAccountDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PZAccountDetailModel.h; sourceTree = "<group>"; };
+		2CC8E73D1CA8018300854F11 /* PZAccountDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PZAccountDetailModel.m; sourceTree = "<group>"; };
+		2CC8E73F1CA801A300854F11 /* PZPersonalSummaryRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PZPersonalSummaryRequest.h; sourceTree = "<group>"; };
+		2CC8E7401CA801A300854F11 /* PZPersonalSummaryRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PZPersonalSummaryRequest.m; sourceTree = "<group>"; };
+		2CC8E7421CA801B600854F11 /* PZPersonalAccountReformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PZPersonalAccountReformer.h; sourceTree = "<group>"; };
+		2CC8E7431CA801B600854F11 /* PZPersonalAccountReformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PZPersonalAccountReformer.m; sourceTree = "<group>"; };
 		2CCEA9D21CA0276100168C4D /* iconfont-back-selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-back-selected.png"; sourceTree = "<group>"; };
 		2CCEA9D31CA0276100168C4D /* iconfont-back-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-back-selected@2x.png"; sourceTree = "<group>"; };
 		2CCEA9D41CA0276100168C4D /* iconfont-back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-back.png"; sourceTree = "<group>"; };
@@ -1201,6 +1225,8 @@
 		2C08B7F51CA41412000298C5 /* ApiBusiness */ = {
 			isa = PBXGroup;
 			children = (
+				2CC8E73F1CA801A300854F11 /* PZPersonalSummaryRequest.h */,
+				2CC8E7401CA801A300854F11 /* PZPersonalSummaryRequest.m */,
 				2C08B7F61CA41412000298C5 /* PZAccountRequest.h */,
 				2C08B7F71CA41412000298C5 /* PZAccountRequest.m */,
 				2C08B7F81CA41412000298C5 /* PZGetAccountListRequest.h */,
@@ -1389,6 +1415,7 @@
 		2C2956F31C73700200E5A194 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2CC8E7291CA8010400854F11 /* LoadingNavigationTitle */,
 				2CDEEB681CA5C0FF0087B5F1 /* LoadFailed */,
 				2CFF79671C9D9125004AE8B4 /* ActionSheet */,
 				2C5A8A841C76965E006E6626 /* Cell */,
@@ -2448,6 +2475,8 @@
 		2C89DD621CA2D97E00325891 /* Reformer */ = {
 			isa = PBXGroup;
 			children = (
+				2CC8E7421CA801B600854F11 /* PZPersonalAccountReformer.h */,
+				2CC8E7431CA801B600854F11 /* PZPersonalAccountReformer.m */,
 				2C89DD631CA2D99D00325891 /* PZGetAccountListReformer.h */,
 				2C89DD641CA2D99D00325891 /* PZGetAccountListReformer.m */,
 				2C89DD661CA2E02C00325891 /* PZBaseReformer.h */,
@@ -2573,6 +2602,15 @@
 				2C821F8E1C7C9AD60076913C /* MSChatUserFriendsCell.m */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		2CC8E7291CA8010400854F11 /* LoadingNavigationTitle */ = {
+			isa = PBXGroup;
+			children = (
+				2CC8E72A1CA8010400854F11 /* PZLoadingNavigationTitle.h */,
+				2CC8E72B1CA8010400854F11 /* PZLoadingNavigationTitle.m */,
+			);
+			path = LoadingNavigationTitle;
 			sourceTree = "<group>";
 		};
 		2CCEA9D11CA0276100168C4D /* Costs */ = {
@@ -2781,6 +2819,8 @@
 		2CDAFE141C9702100067B2F6 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				2CC8E72F1CA8013700854F11 /* PZMyController.h */,
+				2CC8E7301CA8013700854F11 /* PZMyController.m */,
 				2C21B3D31C984D9900D559D4 /* PZTransformController.h */,
 				2C21B3D41C984D9900D559D4 /* PZTransformController.m */,
 			);
@@ -2790,6 +2830,8 @@
 		2CDAFE151C9702100067B2F6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2CC8E73C1CA8018300854F11 /* PZAccountDetailModel.h */,
+				2CC8E73D1CA8018300854F11 /* PZAccountDetailModel.m */,
 				2C21B3E11C985D0500D559D4 /* PZUser.h */,
 				2C21B3E21C985D0500D559D4 /* PZUser.m */,
 				2C21B3E41C985D4C00D559D4 /* PZTransferModel.h */,
@@ -2801,6 +2843,12 @@
 		2CDAFE161C9702100067B2F6 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2CC8E7391CA8017500854F11 /* PZPersonalAccountDetailModel.h */,
+				2CC8E73A1CA8017500854F11 /* PZPersonalAccountDetailModel.m */,
+				2CC8E7361CA8016200854F11 /* PZAccountDetailCell.h */,
+				2CC8E7371CA8016200854F11 /* PZAccountDetailCell.m */,
+				2CC8E7331CA8014D00854F11 /* PZMyHeaderView.h */,
+				2CC8E7341CA8014D00854F11 /* PZMyHeaderView.m */,
 				2C21B3D61C984E5B00D559D4 /* PZTransferView.h */,
 				2C21B3D71C984E5B00D559D4 /* PZTransferView.m */,
 				2C21B3DE1C98591B00D559D4 /* PZTransferCell.h */,
@@ -3662,11 +3710,13 @@
 				2C2957F11C737C7900E5A194 /* AFURLSessionManager.m in Sources */,
 				2C2958141C737C7900E5A194 /* MJExtensionConst.m in Sources */,
 				2C2958161C737C7900E5A194 /* MJProperty.m in Sources */,
+				2CC8E7351CA8014D00854F11 /* PZMyHeaderView.m in Sources */,
 				2C29583C1C737C7900E5A194 /* SDWebImageManager.m in Sources */,
 				2C2956EE1C736F9400E5A194 /* AppDelegate.m in Sources */,
 				2C2957FB1C737C7900E5A194 /* UIRefreshControl+AFNetworking.m in Sources */,
 				2CDC64341CA18AA200BE4C1E /* MSHttpManager.m in Sources */,
 				2C2957F81C737C7900E5A194 /* UIButton+AFNetworking.m in Sources */,
+				2CC8E7441CA801B600854F11 /* PZPersonalAccountReformer.m in Sources */,
 				2C29580E1C737C7900E5A194 /* ViewController+MASAdditions.m in Sources */,
 				2CA4A0E61C75F2C20092931D /* MSUserTool.m in Sources */,
 				2C251A871C99A10300DA8C68 /* PZCostListCell.m in Sources */,
@@ -3684,12 +3734,14 @@
 				2C89DD6E1CA2E33300325891 /* PZBaseRequest.m in Sources */,
 				2C5A8A871C76965E006E6626 /* MSBaseCell.m in Sources */,
 				2CDAFE211C9702590067B2F6 /* MSBaseViewController.m in Sources */,
+				2CC8E7321CA8013700854F11 /* PZMyController.m in Sources */,
 				2C2958551C737CAE00E5A194 /* UIImageView+MS.m in Sources */,
 				2C2958281C737C7900E5A194 /* MJRefreshBackGifFooter.m in Sources */,
 				2C29583D1C737C7900E5A194 /* SDWebImagePrefetcher.m in Sources */,
 				2C2957FA1C737C7900E5A194 /* UIProgressView+AFNetworking.m in Sources */,
 				2C21B3E61C985D4C00D559D4 /* PZTransferModel.m in Sources */,
 				2C2957F41C737C7900E5A194 /* AFAutoPurgingImageCache.m in Sources */,
+				2CC8E7411CA801A300854F11 /* PZPersonalSummaryRequest.m in Sources */,
 				2C2958431C737C7900E5A194 /* UIView+WebCacheOperation.m in Sources */,
 				2C29581A1C737C7900E5A194 /* NSObject+MJCoding.m in Sources */,
 				2C2958251C737C7900E5A194 /* MJRefreshAutoGifFooter.m in Sources */,
@@ -3724,12 +3776,14 @@
 				2C21B3E31C985D0500D559D4 /* PZUser.m in Sources */,
 				2C89DD681CA2E02C00325891 /* PZBaseReformer.m in Sources */,
 				2C29570F1C73724D00E5A194 /* MSSummaryController.m in Sources */,
+				2CC8E73B1CA8017500854F11 /* PZPersonalAccountDetailModel.m in Sources */,
 				2C89DD651CA2D99D00325891 /* PZGetAccountListReformer.m in Sources */,
 				2C2958321C737C7900E5A194 /* UIView+MJExtension.m in Sources */,
 				2C89DD781CA2F4FB00325891 /* PZNetReachability.m in Sources */,
 				2CDAFE241C9702790067B2F6 /* PZHomeController.m in Sources */,
 				2CCEAA4E1CA032B900168C4D /* UIBarButtonItem+MJ.m in Sources */,
 				2C2958211C737C7900E5A194 /* MJRefreshBackFooter.m in Sources */,
+				2CC8E73E1CA8018300854F11 /* PZAccountDetailModel.m in Sources */,
 				2C29580F1C737C7900E5A194 /* README.md in Sources */,
 				2C2957F91C737C7900E5A194 /* UIImageView+AFNetworking.m in Sources */,
 				2C08B8091CA42466000298C5 /* PZRequestResult.m in Sources */,
@@ -3794,6 +3848,8 @@
 				2CDEEB6B1CA5C1210087B5F1 /* PZLoadFailedView.m in Sources */,
 				2C2958241C737C7900E5A194 /* MJRefreshHeader.m in Sources */,
 				2C08B8031CA41F22000298C5 /* PZAccountItem.m in Sources */,
+				2CC8E7381CA8016200854F11 /* PZAccountDetailCell.m in Sources */,
+				2CC8E72C1CA8010400854F11 /* PZLoadingNavigationTitle.m in Sources */,
 				2C251A761C999BF700DA8C68 /* PZHomeCostListController.m in Sources */,
 				2C2958411C737C7900E5A194 /* UIImageView+HighlightedWebCache.m in Sources */,
 				2C2957FC1C737C7900E5A194 /* UIWebView+AFNetworking.m in Sources */,

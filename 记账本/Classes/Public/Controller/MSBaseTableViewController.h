@@ -11,6 +11,9 @@
 
 @interface MSBaseTableViewController : UITableViewController
 
+@property(nonatomic,assign,getter=isNeedHeaderRefresh) BOOL needHeaderRefresh;
+@property(nonatomic,assign,getter=isNeedFooterRefresh) BOOL needFooterRefresh;
+
 -(void)startHeaderRefreshing;
 -(void)startFooterRefreshing;
 
@@ -27,4 +30,8 @@
 -(void)hideLoading:(BOOL)error;
 -(void)buildUI;
 
+-(void)showTitleLoading;
+-(void)hideTitleLoading;
+
+-(void)hideTitleLoadingWithTitle:(NSString *)title;
 @end
