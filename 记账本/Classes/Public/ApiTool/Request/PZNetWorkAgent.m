@@ -39,7 +39,7 @@
 -(instancetype)init
 {
     if (self = [super init]) {
-       // _manager = [AFHTTPSessionManager manager];
+        _manager = [AFHTTPSessionManager manager];
         _config = [[PZRequestConfig alloc] init];
     }
     return self;

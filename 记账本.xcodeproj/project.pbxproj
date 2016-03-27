@@ -344,6 +344,8 @@
 		2CC8E73E1CA8018300854F11 /* PZAccountDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC8E73D1CA8018300854F11 /* PZAccountDetailModel.m */; };
 		2CC8E7411CA801A300854F11 /* PZPersonalSummaryRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC8E7401CA801A300854F11 /* PZPersonalSummaryRequest.m */; };
 		2CC8E7441CA801B600854F11 /* PZPersonalAccountReformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC8E7431CA801B600854F11 /* PZPersonalAccountReformer.m */; };
+		2CC8E7471CA82B7700854F11 /* PZAddSalaryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC8E7461CA82B7700854F11 /* PZAddSalaryController.m */; };
+		2CC8E74B1CA8420900854F11 /* PZInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC8E74A1CA8420900854F11 /* PZInputView.m */; };
 		2CCEAA071CA0276100168C4D /* iconfont-back-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CCEA9D21CA0276100168C4D /* iconfont-back-selected.png */; };
 		2CCEAA081CA0276100168C4D /* iconfont-back-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CCEA9D31CA0276100168C4D /* iconfont-back-selected@2x.png */; };
 		2CCEAA091CA0276100168C4D /* iconfont-back.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CCEA9D41CA0276100168C4D /* iconfont-back.png */; };
@@ -1001,6 +1003,10 @@
 		2CC8E7401CA801A300854F11 /* PZPersonalSummaryRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PZPersonalSummaryRequest.m; sourceTree = "<group>"; };
 		2CC8E7421CA801B600854F11 /* PZPersonalAccountReformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PZPersonalAccountReformer.h; sourceTree = "<group>"; };
 		2CC8E7431CA801B600854F11 /* PZPersonalAccountReformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PZPersonalAccountReformer.m; sourceTree = "<group>"; };
+		2CC8E7451CA82B7700854F11 /* PZAddSalaryController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PZAddSalaryController.h; sourceTree = "<group>"; };
+		2CC8E7461CA82B7700854F11 /* PZAddSalaryController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PZAddSalaryController.m; sourceTree = "<group>"; };
+		2CC8E7491CA8420900854F11 /* PZInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PZInputView.h; sourceTree = "<group>"; };
+		2CC8E74A1CA8420900854F11 /* PZInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PZInputView.m; sourceTree = "<group>"; };
 		2CCEA9D21CA0276100168C4D /* iconfont-back-selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-back-selected.png"; sourceTree = "<group>"; };
 		2CCEA9D31CA0276100168C4D /* iconfont-back-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-back-selected@2x.png"; sourceTree = "<group>"; };
 		2CCEA9D41CA0276100168C4D /* iconfont-back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-back.png"; sourceTree = "<group>"; };
@@ -2613,6 +2619,15 @@
 			path = LoadingNavigationTitle;
 			sourceTree = "<group>";
 		};
+		2CC8E7481CA841F300854F11 /* InputView */ = {
+			isa = PBXGroup;
+			children = (
+				2CC8E7491CA8420900854F11 /* PZInputView.h */,
+				2CC8E74A1CA8420900854F11 /* PZInputView.m */,
+			);
+			path = InputView;
+			sourceTree = "<group>";
+		};
 		2CCEA9D11CA0276100168C4D /* Costs */ = {
 			isa = PBXGroup;
 			children = (
@@ -2785,6 +2800,8 @@
 				2C251A751C999BF700DA8C68 /* PZHomeCostListController.m */,
 				2CDC64251CA17F1900BE4C1E /* PZAddCostController.h */,
 				2CDC64261CA17F1900BE4C1E /* PZAddCostController.m */,
+				2CC8E7451CA82B7700854F11 /* PZAddSalaryController.h */,
+				2CC8E7461CA82B7700854F11 /* PZAddSalaryController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2799,6 +2816,7 @@
 		2CDAFE121C9702100067B2F6 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2CC8E7481CA841F300854F11 /* InputView */,
 				2CCEAA511CA039AA00168C4D /* AddCostView */,
 				2C251A781C999C5800DA8C68 /* IconCell */,
 				2C251A771C999C2600DA8C68 /* CostCell */,
@@ -3722,6 +3740,7 @@
 				2C251A871C99A10300DA8C68 /* PZCostListCell.m in Sources */,
 				2C2958091C737C7900E5A194 /* MASViewAttribute.m in Sources */,
 				2C2958061C737C7900E5A194 /* MASConstraint.m in Sources */,
+				2CC8E7471CA82B7700854F11 /* PZAddSalaryController.m in Sources */,
 				2C2958151C737C7900E5A194 /* MJFoundation.m in Sources */,
 				2C821F8F1C7C9AD60076913C /* MSChatUserFriendsCell.m in Sources */,
 				2C2958351C737C7900E5A194 /* README.md in Sources */,
@@ -3835,6 +3854,7 @@
 				2C2956EF1C736F9400E5A194 /* ViewController.m in Sources */,
 				2C2957EC1C737C7900E5A194 /* AFHTTPSessionManager.m in Sources */,
 				2C9104A71C7B6A5A00F5C84E /* MSChatController.m in Sources */,
+				2CC8E74B1CA8420900854F11 /* PZInputView.m in Sources */,
 				2C29570C1C73723400E5A194 /* MSMyController.m in Sources */,
 				2CDC64271CA17F1900BE4C1E /* PZAddCostController.m in Sources */,
 				2CB5464A1C7767C10024CD80 /* MSSummaryLastView.m in Sources */,

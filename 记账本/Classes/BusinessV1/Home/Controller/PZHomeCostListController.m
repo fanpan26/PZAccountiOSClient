@@ -22,6 +22,7 @@
 #import "PZRequestResult.h"
 
 #import "PZLoadFailedView.h"
+#import "PZAddSalaryController.h"
 
 static NSString *kPZCostListCellID = @"kPZCostListCellID";
 
@@ -183,10 +184,18 @@ static NSString *kPZCostListCellID = @"kPZCostListCellID";
     if ([identifier isEqualToString:kPZAddCostTypeCodeCost]) {
         MSAddController *controller = [[MSAddController alloc] init];
         controller.type = MSAddViewTypeEveryDay;
-        [self.navigationController presentViewController:controller animated:YES completion:nil];
+        controller.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:controller animated:YES];
     }
     //添加余额信息
     if ([identifier isEqualToString:kPZAddCostTypeCodeLast]) {
+    }
+    //添加工资信息
+    if ([identifier isEqualToString:kPZAddCostTypeCodeSalary]) {
+        NSLog(@"跳转到添加工资");
+        PZAddSalaryController *addSalaryController = [[PZAddSalaryController alloc] init];
+        addSalaryController.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:addSalaryController animated:YES];
     }
 }
 
