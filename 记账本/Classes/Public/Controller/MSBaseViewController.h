@@ -17,6 +17,8 @@
 
 
 -(void)showTitleLoading;
+-(void)showTitleLoadingWithTitle:(NSString *)title;
+
 -(void)hideTitleLoading;
 
 -(void)hideTitleLoadingWithTitle:(NSString *)title;

@@ -53,7 +53,15 @@
 
 -(void)showTitleLoading
 {
+    [self showTitleLoadingWithTitle:nil];
+}
+
+-(void)showTitleLoadingWithTitle:(NSString *)title
+{
     if (!self.navigationItem.titleView) {
+        if (title) {
+            self.loadingTitleView.title = title;
+        }
         self.navigationItem.titleView = self.loadingTitleView;
     }
     [self.loadingTitleView startAnimation];

@@ -11,5 +11,6 @@
 @interface PZInputView : UIView
 
 @property(nonatomic,copy) NSString *leftTitleText;
+@property(nonatomic,copy) NSString *rightContentText;
 
 @end

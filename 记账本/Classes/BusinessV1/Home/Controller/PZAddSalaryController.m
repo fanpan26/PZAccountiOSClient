@@ -10,8 +10,12 @@
 #import "Masonry.h"
 #import "PZInputView.h"
 #import "MSCommon.h"
+#import "UIBarButtonItem+MJ.h"
 
-@interface PZAddSalaryController()
+#import "PZNetWorkAgent.h"
+#import "PZAddDataRequest.h"
+
+@interface PZAddSalaryController()<PZBaseRequestDelegate>
 
 @property(nonatomic,strong) PZInputView *timeLabel;
 @property(nonatomic,strong) PZInputView *salaryText;
@@ -33,10 +37,13 @@
 -(void)buildUI
 {
     self.edgesForExtendedLayout = NO;
+    self.title = @"添加工资";
     self.view.backgroundColor = kMSColor(248, 248, 248);
     [self.view addSubview:self.timeLabel];
     [self.view addSubview:self.salaryText];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithIcon:@"iconfont-baocun" highlightedIcon:@"iconfont-baocun-selected" target:self action:@selector(rightClicked:)];
     
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithIcon:@"navigationbar_back" highlightedIcon:@"navigationbar_back_highlighted" target:self action:@selector(back:)];
     [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view.mas_top).with.offset(20);
         make.left.equalTo(self.view.mas_left);
@@ -52,14 +59,40 @@
     }];
 }
 
+
+-(void)rightClicked:(UIBarButtonItem *)item
+{
+    PZNetWorkAgent *agent = [[PZNetWorkAgent alloc] init];
+    float money = 1000.0f;
+    PZAddDataRequest *request = [[PZAddDataRequest alloc] initSalaryTypeWithSalary:money];
+    request.delegate = self;
+    [self showTitleLoadingWithTitle:@"保存中..."];
+    [agent startWithBaseRequest:request];
+}
+
+-(void)back:(UIBarButtonItem *)item
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 #pragma mark delegate
 
+-(void)requestSuccessWithRequest:(__kindof PZBaseRequest *)request
+{
+    [self hideTitleLoadingWithTitle:@"添加工资"];
+    [self back:nil];
+}
+
+-(void)requestFailedWithRequest:(__kindof PZBaseRequest *)request
+{
+    
+}
 #pragma mark getter setter
 -(PZInputView *)timeLabel
 {
     if (_timeLabel == nil) {
         _timeLabel = [[PZInputView alloc] init];
         _timeLabel.leftTitleText = @"日期";
+        _timeLabel.rightContentText = [self getDate];
     }
     return _timeLabel;
 }

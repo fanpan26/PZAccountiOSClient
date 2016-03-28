@@ -6,8 +6,8 @@
 //  Copyright © 2016年 fyp. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "MSBaseViewController.h"
 
-@interface PZAddSalaryController : UIViewController
+@interface PZAddSalaryController : MSBaseViewController
 
 @end

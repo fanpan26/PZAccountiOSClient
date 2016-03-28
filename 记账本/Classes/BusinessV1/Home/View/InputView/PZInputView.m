@@ -61,8 +61,15 @@
 
 -(void)setLeftTitleText:(NSString *)leftTitleText
 {
+    _leftTitleText = [leftTitleText copy];
     self.leftTitle.text = leftTitleText;
     [self.leftTitle sizeToFit];
+}
+
+-(void)setRightContentText:(NSString *)rightContentText
+{
+    _rightContentText = [rightContentText copy];
+    _textField.text = _rightContentText;
 }
 
 -(void)setFrame:(CGRect)frame
