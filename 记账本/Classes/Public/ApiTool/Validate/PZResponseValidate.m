@@ -30,7 +30,6 @@ NSString *const requestFailedCode = @"err";
                 @"data":responseObject[@"msg"]
             };
         }
-        
     }
     return nil;
 }

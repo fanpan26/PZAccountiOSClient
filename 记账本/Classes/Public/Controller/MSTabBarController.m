@@ -12,7 +12,7 @@
 #import "PZSummaryController.h"
 #import "PZMyController.h"
 #import "MSMyController.h"
-#import "MSChatController.h"
+#import "PZSettingController.h"
 #import "MSCommon.h"
 
 @implementation MSTabBarController
@@ -45,7 +45,7 @@
     my.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"我的" image:[UIImage imageNamed:@"TabBar_Assets"] tag:3];
     [childControllers addObject:my];
     //聊天
-    MSChatController *chatChild = [[MSChatController alloc] initWithStyle:UITableViewStylePlain];
+    PZSettingController *chatChild = [[PZSettingController alloc] initWithStyle:UITableViewStylePlain];
     MSNavigationController *chat = [[MSNavigationController alloc] initWithRootViewController:chatChild];
     chat.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"设置" image:[UIImage imageNamed:@"tab_me_nor"] tag:4];
     [childControllers addObject:chat];

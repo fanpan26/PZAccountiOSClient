@@ -14,8 +14,9 @@ typedef NS_ENUM(NSUInteger,PZRequestType) {
 };
 
 typedef NS_ENUM(NSUInteger,PZRequestSerializerType) {
-    PZRequestSerializerTypeHTTP = 0,
-    PZRequestSerializerTypeJSON = 1
+    PZRequestSerializerTypeHTTP = 1,
+    PZRequestSerializerTypeJSON = 2,
+    PZRequestSerializerTypeNone = 0
 };
 
 @class PZBaseRequest;

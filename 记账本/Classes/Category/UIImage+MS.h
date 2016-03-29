@@ -16,7 +16,11 @@
 
 + (UIImage *)resizedImage:(NSString *)imgName xPos:(CGFloat)xPos yPos:(CGFloat)yPos;
 
+//
+//-(UIImage *) ms_imageWithRoundedCornerAndSize:(CGSize)sizeToFit
+//                              andCornerRadius:(CGFloat)radius;
 
--(UIImage *) ms_imageWithRoundedCornerAndSize:(CGSize)sizeToFit
-                              andCornerRadius:(CGFloat)radius;
+- (BOOL)imageHasAlpha;
+
+- (NSString *) base64String;
 @end

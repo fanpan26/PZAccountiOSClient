@@ -340,6 +340,9 @@
 		2C91049E1C7B623400F5C84E /* RongCloudKit.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2C9104951C7B623400F5C84E /* RongCloudKit.strings */; };
 		2C9104A41C7B69F900F5C84E /* MSChatListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C9104A31C7B69F900F5C84E /* MSChatListViewController.m */; };
 		2C9104A71C7B6A5A00F5C84E /* MSChatController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C9104A61C7B6A5A00F5C84E /* MSChatController.m */; };
+		2C98B0851CAAE725006BDE48 /* PZUploadImageRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C98B0841CAAE725006BDE48 /* PZUploadImageRequest.m */; };
+		2C98B0881CAAEA0B006BDE48 /* PZSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C98B0871CAAEA0B006BDE48 /* PZSettingController.m */; };
+		2C98B08A1CAAEB69006BDE48 /* kenan.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 2C98B0891CAAEB69006BDE48 /* kenan.jpeg */; };
 		2CA4A0E01C75ED3E0092931D /* MSBaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA4A0DF1C75ED3D0092931D /* MSBaseTableViewController.m */; };
 		2CA4A0E31C75F2AF0092931D /* MSCurrentUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA4A0E21C75F2AF0092931D /* MSCurrentUser.m */; };
 		2CA4A0E61C75F2C20092931D /* MSUserTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA4A0E51C75F2C20092931D /* MSUserTool.m */; };
@@ -996,6 +999,11 @@
 		2C9104A31C7B69F900F5C84E /* MSChatListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSChatListViewController.m; sourceTree = "<group>"; };
 		2C9104A51C7B6A5A00F5C84E /* MSChatController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSChatController.h; sourceTree = "<group>"; };
 		2C9104A61C7B6A5A00F5C84E /* MSChatController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSChatController.m; sourceTree = "<group>"; };
+		2C98B0831CAAE725006BDE48 /* PZUploadImageRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PZUploadImageRequest.h; sourceTree = "<group>"; };
+		2C98B0841CAAE725006BDE48 /* PZUploadImageRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PZUploadImageRequest.m; sourceTree = "<group>"; };
+		2C98B0861CAAEA0B006BDE48 /* PZSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PZSettingController.h; path = "记账本/Classes/Public/ApiTool/ApiBusiness/PZSettingController.h"; sourceTree = SOURCE_ROOT; };
+		2C98B0871CAAEA0B006BDE48 /* PZSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PZSettingController.m; path = "记账本/Classes/Public/ApiTool/ApiBusiness/PZSettingController.m"; sourceTree = SOURCE_ROOT; };
+		2C98B0891CAAEB69006BDE48 /* kenan.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = kenan.jpeg; sourceTree = "<group>"; };
 		2CA4A0DE1C75ED3D0092931D /* MSBaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSBaseTableViewController.h; sourceTree = "<group>"; };
 		2CA4A0DF1C75ED3D0092931D /* MSBaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSBaseTableViewController.m; sourceTree = "<group>"; };
 		2CA4A0E11C75F2AF0092931D /* MSCurrentUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSCurrentUser.h; sourceTree = "<group>"; };
@@ -1264,6 +1272,8 @@
 				2C08B80B1CA43420000298C5 /* PZUserSummaryRequest.m */,
 				2C78E54D1CA97D9C00C85947 /* PZAddDataRequest.h */,
 				2C78E54E1CA97D9C00C85947 /* PZAddDataRequest.m */,
+				2C98B0831CAAE725006BDE48 /* PZUploadImageRequest.h */,
+				2C98B0841CAAE725006BDE48 /* PZUploadImageRequest.m */,
 			);
 			path = ApiBusiness;
 			sourceTree = "<group>";
@@ -1391,6 +1401,7 @@
 		2C2956ED1C736F9400E5A194 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2C98B0891CAAEB69006BDE48 /* kenan.jpeg */,
 				2CDEEB591CA579B70087B5F1 /* Other */,
 				2CCEA9D11CA0276100168C4D /* Costs */,
 				2C251A8B1C99B48E00DA8C68 /* Nav */,
@@ -2923,6 +2934,8 @@
 		2CDAFE181C9702100067B2F6 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				2C98B0861CAAEA0B006BDE48 /* PZSettingController.h */,
+				2C98B0871CAAEA0B006BDE48 /* PZSettingController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3510,6 +3523,7 @@
 				2C5A8B8D1C7697FE006E6626 /* statusdetail_comment_top_background@2x.png in Resources */,
 				2CDAFEC51C9715EC0067B2F6 /* Contents.json in Resources */,
 				2CCEAA3A1CA0276100168C4D /* iconfont-yaopin@2x.png in Resources */,
+				2C98B08A1CAAEB69006BDE48 /* kenan.jpeg in Resources */,
 				2CDEEB671CA5873D0087B5F1 /* cell_separator_line@2x.png in Resources */,
 				2C5A8B821C7697FE006E6626 /* Contents.json in Resources */,
 				2CDAFE0C1C9700860067B2F6 /* Contents.json in Resources */,
@@ -3776,6 +3790,7 @@
 				2CC8E7351CA8014D00854F11 /* PZMyHeaderView.m in Sources */,
 				2C29583C1C737C7900E5A194 /* SDWebImageManager.m in Sources */,
 				2C2956EE1C736F9400E5A194 /* AppDelegate.m in Sources */,
+				2C98B0881CAAEA0B006BDE48 /* PZSettingController.m in Sources */,
 				2C2957FB1C737C7900E5A194 /* UIRefreshControl+AFNetworking.m in Sources */,
 				2CDC64341CA18AA200BE4C1E /* MSHttpManager.m in Sources */,
 				2C2957F81C737C7900E5A194 /* UIButton+AFNetworking.m in Sources */,
@@ -3844,6 +3859,7 @@
 				2C89DD651CA2D99D00325891 /* PZGetAccountListReformer.m in Sources */,
 				2C2958321C737C7900E5A194 /* UIView+MJExtension.m in Sources */,
 				2C78E54F1CA97D9C00C85947 /* PZAddDataRequest.m in Sources */,
+				2C98B0851CAAE725006BDE48 /* PZUploadImageRequest.m in Sources */,
 				2C89DD781CA2F4FB00325891 /* PZNetReachability.m in Sources */,
 				2CDAFE241C9702790067B2F6 /* PZHomeController.m in Sources */,
 				2CCEAA4E1CA032B900168C4D /* UIBarButtonItem+MJ.m in Sources */,

@@ -53,6 +53,11 @@
     return self;
 }
 
+-(PZRequestSerializerType)serializerType
+{
+    return  PZRequestSerializerTypeNone;
+}
+
 -(PZRequestType)requestType
 {
     return PZRequestTypePost;
@@ -60,17 +65,17 @@
 
 -(NSString *)op
 {
-    return [NSString stringWithFormat: @"add&token=123123&type=%lu",(unsigned long)_type];
+    return @"add";
 }
 
 -(NSDictionary *)params
 {
     return @{
-         @"operate_user":@(self.userid),
-         @"money":@(_money),
-         @"type":@(_type),
-         @"category":@(_category),
-         @"other":_other
+        @"operate_user":@(self.userid),
+        @"money":@(_money),
+        @"type":@(_type),
+        @"category":@(_category),
+        @"other":_other
     };
 }
 

@@ -72,7 +72,7 @@
     
     if (request.serializerType == PZRequestSerializerTypeHTTP) {
         _manager.requestSerializer = [AFHTTPRequestSerializer serializer];
-    }else{
+    }else if(request.serializerType == PZRequestSerializerTypeJSON){
         _manager.requestSerializer = [AFJSONRequestSerializer serializer];
     }
     [self requestWithType:type path:path header:request.header params:request.params delegate:request.delegate];
@@ -86,9 +86,9 @@
     }
     
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithDictionary:params];
-    
     if (_config.defaultValidateParams != nil) {
        [_config.defaultValidateParams enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+
            dictionary[key] = obj;
        }];
     }

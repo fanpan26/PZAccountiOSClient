@@ -59,6 +59,7 @@ single_implementation(MSHttpManager)
         params = @{@"r":@"macrosage"};
     }
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:params];
+    NSLog(@"==============%@",dict);
     //[dict setValue:@"other" forKey:@"other"];//添加其他公共参数
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     if (json == NO) {
