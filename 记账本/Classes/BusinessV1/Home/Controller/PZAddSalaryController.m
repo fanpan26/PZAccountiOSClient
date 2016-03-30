@@ -20,7 +20,8 @@
 
 @property(nonatomic,strong) PZInputView *timeLabel;
 @property(nonatomic,strong) PZInputView *salaryText;
-
+@property(nonatomic,strong) PZInputView *otherText;
+@property(nonatomic,copy) NSString *typeString;
 
 @end
 
@@ -38,7 +39,7 @@
 -(void)buildUI
 {
     self.edgesForExtendedLayout = NO;
-    self.title = @"添加工资";
+    self.title = [NSString stringWithFormat:@"添加%@",self.typeString];
     self.view.backgroundColor = kMSColor(248, 248, 248);
     [self.view addSubview:self.timeLabel];
     [self.view addSubview:self.salaryText];
@@ -64,8 +65,17 @@
 -(void)rightClicked:(UIBarButtonItem *)item
 {
     PZNetWorkAgent *agent = [[PZNetWorkAgent alloc] init];
-    float money = 1000.0f;
-    PZAddDataRequest *request = [[PZAddDataRequest alloc] initSalaryTypeWithSalary:money];
+    float money = [self.salaryText.inputText floatValue];
+    if (money <= 0) {
+        [self back:nil];
+        return;
+    }
+    PZAddDataRequest *request ;
+    if (self.addType == PZAddTypeSalary) {
+        request = [[PZAddDataRequest alloc] initSalaryTypeWithSalary:money];
+    }else{
+        request = [[PZAddDataRequest alloc] initLastTypeWithLast:money];
+    }
     request.delegate = self;
     [self showTitleLoadingWithTitle:@"保存中..."];
     [agent startWithBaseRequest:request];
@@ -79,7 +89,7 @@
 
 -(void)requestSuccessWithRequest:(__kindof PZBaseRequest *)request
 {
-    [self hideTitleLoadingWithTitle:@"添加工资"];
+    [self hideTitleLoadingWithTitle:[NSString stringWithFormat:@"添加%@",self.typeString]];
     [self back:nil];
 }
 
@@ -94,6 +104,7 @@
         _timeLabel = [[PZInputView alloc] init];
         _timeLabel.leftTitleText = @"日期";
         _timeLabel.rightContentText = [self getDate];
+        _timeLabel.isTextReadOnly = YES;
     }
     return _timeLabel;
 }
@@ -102,7 +113,7 @@
 {
     if (_salaryText == nil) {
         _salaryText = [[PZInputView alloc] init];
-        _salaryText.leftTitleText = @"工资";
+        _salaryText.leftTitleText = self.typeString;
     }
     return _salaryText;
 }
@@ -113,6 +124,25 @@
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     NSString *dateAndTime = [dateFormatter stringFromDate:date];
     return dateAndTime;
+}
+
+-(void)setAddType:(PZAddType)addType
+{
+    _addType = addType;
+    switch (addType) {
+        case PZAddTypeCost:
+            self.typeString = @"消费";
+            break;
+        case PZAddTypeLast:
+            self.typeString = @"余额";
+            break;
+        case PZAddTypeSalary:
+            self.typeString = @"工资";
+            break;
+            
+        default:
+            break;
+    }
 }
 
 @end

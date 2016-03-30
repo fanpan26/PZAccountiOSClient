@@ -12,5 +12,7 @@
 
 @property(nonatomic,copy) NSString *leftTitleText;
 @property(nonatomic,copy) NSString *rightContentText;
+@property(nonatomic,strong,readonly) NSString *inputText;
+@property(nonatomic,assign) BOOL isTextReadOnly;
 
 @end

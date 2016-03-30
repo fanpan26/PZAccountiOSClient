@@ -182,18 +182,22 @@ static NSString *kPZCostListCellID = @"kPZCostListCellID";
 {
     //消费信息
     if ([identifier isEqualToString:kPZAddCostTypeCodeCost]) {
-        MSAddController *controller = [[MSAddController alloc] init];
-        controller.type = MSAddViewTypeEveryDay;
-        controller.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:controller animated:YES];
+        PZAddSalaryController *addSalaryController = [[PZAddSalaryController alloc] init];
+        addSalaryController.addType = PZAddTypeCost;
+        addSalaryController.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:addSalaryController animated:YES];
     }
     //添加余额信息
     if ([identifier isEqualToString:kPZAddCostTypeCodeLast]) {
+        PZAddSalaryController *addSalaryController = [[PZAddSalaryController alloc] init];
+        addSalaryController.addType = PZAddTypeLast;
+        addSalaryController.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:addSalaryController animated:YES];
     }
     //添加工资信息
     if ([identifier isEqualToString:kPZAddCostTypeCodeSalary]) {
-        NSLog(@"跳转到添加工资");
         PZAddSalaryController *addSalaryController = [[PZAddSalaryController alloc] init];
+        addSalaryController.addType = PZAddTypeSalary;
         addSalaryController.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:addSalaryController animated:YES];
     }

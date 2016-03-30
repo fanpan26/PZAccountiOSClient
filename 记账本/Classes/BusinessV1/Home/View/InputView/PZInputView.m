@@ -78,4 +78,17 @@
     [super setFrame:frame];
 }
 
+-(NSString *)inputText
+{
+    return self.textField.text;
+}
+
+-(void)setIsTextReadOnly:(BOOL)isTextReadOnly
+{
+    _isTextReadOnly = isTextReadOnly;
+    if (_isTextReadOnly) {
+        self.textField.enabled = NO;
+    }
+}
+
 @end

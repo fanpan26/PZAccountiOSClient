@@ -52,8 +52,8 @@
         mimeType = @"image/jpeg";
     }
     return [NSString stringWithFormat:@"%@",[imageData base64EncodedStringWithOptions: 0]];
-    return [NSString stringWithFormat:@"data:%@;base64,%@", mimeType,
-            [imageData base64EncodedStringWithOptions: 0]];
+   // return [NSString stringWithFormat:@"data:%@;base64,%@", mimeType,
+      //      [imageData base64EncodedStringWithOptions: 0]];
     
 }
 

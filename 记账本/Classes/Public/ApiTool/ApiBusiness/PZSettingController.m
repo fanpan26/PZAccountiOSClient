@@ -25,14 +25,14 @@
 -(void)buildUI
 {
     [super buildUI];
-    self.title = @"设置";
-    PZNetWorkAgent *agent = [[PZNetWorkAgent alloc] init];
-    UIImage *img = [UIImage imageNamed:@"kenan.jpeg"];
-    NSString *base64 = [img base64String];
-    NSLog(@"%@",base64);
-    PZUploadImageRequest *request = [[PZUploadImageRequest alloc] initWithBase64:base64];
-    request.delegate = self;
-    [agent startWithBaseRequest:request];
+//    self.title = @"设置";
+//    PZNetWorkAgent *agent = [[PZNetWorkAgent alloc] init];
+//    UIImage *img = [UIImage imageNamed:@"kenan.jpeg"];
+//    NSString *base64 = [img base64String];
+//    NSLog(@"%@",base64);
+//    PZUploadImageRequest *request = [[PZUploadImageRequest alloc] initWithBase64:base64];
+//    request.delegate = self;
+//    [agent startWithBaseRequest:request];
     
 }
 
