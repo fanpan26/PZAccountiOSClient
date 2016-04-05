@@ -18,13 +18,17 @@
 #import "PZPersonalSummaryRequest.h"
 #import "PZPersonalAccountReformer.h"
 #import "PZPersonalAccountDetailModel.h"
+#import "UIImage+MS.h"
+#import "PZUploadImageRequest.h"
 
-@interface PZMyController()<PZBaseRequestDelegate>
+@interface PZMyController()<PZBaseRequestDelegate,PZMyHeaderViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @property(nonatomic,strong,readonly) NSArray *accountTypes;
 @property(nonatomic,strong) NSArray *accountMoneys;
+@property(nonatomic,strong) PZMyHeaderView *headerView;
 
 @property(nonatomic,strong) PZPersonalAccountReformer *reformer;
+
 
 @end
 
@@ -56,17 +60,26 @@
 
 -(void)requestSuccessWithRequest:(__kindof PZBaseRequest *)request
 {
-    PZRequestResult *result = [request fetchDataWithReformer:self.reformer];
-    if(result.isSuccessData){
-        PZPersonalAccountDetailModel *model = result.data;
-        self.accountMoneys = model.values;
-        [self reloadData];
+    if ([request isKindOfClass:[PZPersonalSummaryRequest class]]) {
+        PZRequestResult *result = [request fetchDataWithReformer:self.reformer];
+        if(result.isSuccessData){
+            PZPersonalAccountDetailModel *model = result.data;
+            self.accountMoneys = model.values;
+            
+            self.headerView.photo = request.responseObject[@"data"][@"user"][@"user_photo"];
+            self.headerView.name = request.responseObject[@"data"][@"user"][@"user_name"];
+            [self reloadData];
+        }
+        [self hideTitleLoadingWithTitle:@"我的"];
+        [self endHeaderRefreshing];
+    }else{
+        NSLog(@"头像上传成功");
+        [self loadData];
     }
-    [self hideTitleLoadingWithTitle:@"我的"];
-    [self endHeaderRefreshing];
 }
 -(void)requestFailedWithRequest:(__kindof PZBaseRequest *)request
 {
+    NSLog(@"%@",request.error);
     [self hideTitleLoadingWithTitle:@"加载失败..."];
     [self endHeaderRefreshing];
 }
@@ -78,6 +91,50 @@
     [self endHeaderRefreshing];
 }
 
+
+-(void)didTapHeaderView:(PZMyHeaderView *)headerView
+{
+    UIImagePickerController *controller = [[UIImagePickerController alloc] init];
+    controller.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    controller.allowsEditing = YES;
+    controller.delegate = self;
+    [self presentViewController:controller animated:YES completion:^{
+        
+    }];
+}
+
+
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
+{
+     [picker dismissViewControllerAnimated:YES completion:nil] ;
+    
+    UIImage *selectedImage = [info objectForKey:UIImagePickerControllerEditedImage];
+    
+    
+    //创建一个bitmap的context
+    //并把他设置成当前的context
+    UIGraphicsBeginImageContext(CGSizeMake(80, 80));
+    //绘制图片的大小
+    [selectedImage drawInRect:CGRectMake(0, 0, 80, 80)];
+    //从当前context中创建一个改变大小后的图片
+    UIImage *endImage=UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    
+    
+    NSString *base64 = [endImage base64String];
+    PZNetWorkAgent *agent = [[PZNetWorkAgent alloc] init];
+    PZUploadImageRequest *request = [[PZUploadImageRequest alloc] initWithBase64:base64];
+    request.delegate = self;
+    [agent startWithBaseRequest:request];
+    
+}
+
+-(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [picker dismissViewControllerAnimated:YES completion:nil] ;
+}
 #pragma  mark private methods
 
 -(void)buildUI
@@ -87,6 +144,8 @@
     self.needFooterRefresh = NO;//不需要下拉刷新
     MSCurrentUser *user = [MSUserTool sharedMSUserTool].currentUser;
     PZMyHeaderView *headerView = [[PZMyHeaderView alloc] initWithPhoto:user.userPhoto name:user.userName];
+    headerView.delegate = self;
+    self.headerView = headerView;
     self.tableView.tableHeaderView = headerView;
     
 }
@@ -106,7 +165,6 @@
 {
     PZAccountDetailType type = [self.accountTypes[indexPath.row] integerValue];
     float money = [self.accountMoneys[indexPath.row] floatValue];
-    NSLog(@"%f",money);
     PZAccountDetailCell *cell = [PZAccountDetailCell cellWithType:type money:money inTableView:tableView atIndexPath:indexPath];
     return cell;
 }

@@ -34,13 +34,26 @@
     if (self = [self initWithFrame:CGRectZero]) {
         self.photo = photo;
         self.name = name;
+        [self addGesture];
     }
     return self;
 }
 
+-(void)addGesture
+{
+    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
+    [self addGestureRecognizer:gesture];
+}
+
+-(void)tap:(UITapGestureRecognizer *)gesture
+{
+    if (_delegate && [_delegate respondsToSelector:@selector(didTapHeaderView:)]) {
+        [_delegate didTapHeaderView:self];
+    }
+}
+
 -(void)layoutSubviews
 {
-    NSLog(@"%s",__func__);
     [super layoutSubviews];
     CGSize photoViewSize = [MSPhotoView photoSizeWithSize:MSPhotoViewSizeBig];
     [self.photoView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -59,7 +72,6 @@
 
 -(MSPhotoView *)photoView
 {
-    NSLog(@"%@",self.photo);
     if (_photoView == nil) {
         _photoView = [[MSPhotoView alloc] initWithPhoto:self.photo size:MSPhotoViewSizeBig];
         _photoView.photoType = MSPhotoViewTypeRound;

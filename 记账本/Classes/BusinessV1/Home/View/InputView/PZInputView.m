@@ -48,6 +48,17 @@
     return _leftTitle;
 }
 
+
+-(void)setKeyboardType:(PZInputViewKeyboardType)keyboardType
+{
+    _keyboardType = keyboardType;
+    if (_keyboardType == PZInputViewKeyboardTypeText) {
+        _textField.keyboardType = UIKeyboardTypeDefault;
+    }else{
+        _textField.keyboardType = UIKeyboardTypeDecimalPad;
+    }
+}
+
 -(UITextField *)textField
 {
     if (_textField == nil) {

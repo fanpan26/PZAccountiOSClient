@@ -8,11 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
+
+typedef  NS_ENUM(NSUInteger,PZInputViewKeyboardType){
+    PZInputViewKeyboardTypeText = 1,
+    PZInputViewKeyboardTypeNumber = 2
+};
+
 @interface PZInputView : UIView
 
 @property(nonatomic,copy) NSString *leftTitleText;
 @property(nonatomic,copy) NSString *rightContentText;
 @property(nonatomic,strong,readonly) NSString *inputText;
 @property(nonatomic,assign) BOOL isTextReadOnly;
+
+@property(nonatomic,assign) PZInputViewKeyboardType keyboardType;
 
 @end

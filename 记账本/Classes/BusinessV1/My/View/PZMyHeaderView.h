@@ -8,11 +8,23 @@
 
 #import <UIKit/UIKit.h>
 
+@class PZMyHeaderView;
+
+@protocol PZMyHeaderViewDelegate <NSObject>
+
+@optional
+
+-(void)didTapHeaderView:(PZMyHeaderView *)headerView;
+
+@end
+
 @interface PZMyHeaderView : UIView
 
 -(instancetype)initWithPhoto:(NSString *)photo name:(NSString *)name;
 
 @property(nonatomic,copy) NSString *photo;
 @property(nonatomic,copy) NSString *name;
+
+@property(nonatomic,weak) id<PZMyHeaderViewDelegate> delegate;
 
 @end

@@ -43,6 +43,8 @@
     self.view.backgroundColor = kMSColor(248, 248, 248);
     [self.view addSubview:self.timeLabel];
     [self.view addSubview:self.salaryText];
+    [self.view addSubview:self.otherText];
+    
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithIcon:@"iconfont-baocun" highlightedIcon:@"iconfont-baocun-selected" target:self action:@selector(rightClicked:)];
     
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithIcon:@"navigationbar_back" highlightedIcon:@"navigationbar_back_highlighted" target:self action:@selector(back:)];
@@ -55,6 +57,13 @@
     
     [self.salaryText mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.timeLabel.mas_bottom).with.offset(20);
+        make.left.equalTo(self.view.mas_left);
+        make.width.mas_equalTo(kMSScreenWidth);
+        make.height.mas_equalTo(44);
+    }];
+    
+    [self.otherText mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.salaryText.mas_bottom).with.offset(20);
         make.left.equalTo(self.view.mas_left);
         make.width.mas_equalTo(kMSScreenWidth);
         make.height.mas_equalTo(44);
@@ -73,8 +82,11 @@
     PZAddDataRequest *request ;
     if (self.addType == PZAddTypeSalary) {
         request = [[PZAddDataRequest alloc] initSalaryTypeWithSalary:money];
-    }else{
+    }else if(self.addType == PZAddTypeLast){
         request = [[PZAddDataRequest alloc] initLastTypeWithLast:money];
+    }else{
+        NSString *other = self.otherText.inputText;
+        request = [[PZAddDataRequest alloc] initCostTypeWithCost:money category:2 other:other];
     }
     request.delegate = self;
     [self showTitleLoadingWithTitle:@"保存中..."];
@@ -117,6 +129,17 @@
     }
     return _salaryText;
 }
+
+-(PZInputView *)otherText
+{
+    if (_otherText == nil) {
+        _otherText = [[PZInputView alloc] init];
+        _otherText.leftTitleText = @"备注";
+        _otherText.keyboardType = PZInputViewKeyboardTypeText;
+        _otherText.hidden = YES;
+    }
+    return  _otherText;
+}
 -(NSString *)getDate
 {
     NSDate *date = [NSDate date];
@@ -132,6 +155,7 @@
     switch (addType) {
         case PZAddTypeCost:
             self.typeString = @"消费";
+            self.otherText.hidden = NO;
             break;
         case PZAddTypeLast:
             self.typeString = @"余额";
